@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.3.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.4.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -3088,9 +3088,11 @@ html=refPolished.innerHTML;
     root.querySelector('.ref-grid').innerHTML=refCards(selected);
     root.querySelectorAll('[data-ref-filter]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-ref-filter')===mode));});
   });
-  // Fixed campaign deadline; never reset a visitor's countdown to create urgency.
-  var refDeadline=new Date('2026-09-24T00:00:00+03:00').getTime();
-  function refTick(){var n=Math.max(0,Math.floor((refDeadline-Date.now())/1000));var vals=[Math.floor(n/86400),Math.floor(n%86400/3600),Math.floor(n%3600/60),n%60];['days','hours','minutes','seconds'].forEach(function(k,i){root.querySelector('#ref-'+k).textContent=String(vals[i]).padStart(2,'0');});if(n===0){root.querySelector('.ref-countdown').hidden=true;}}
+  // Recurring 7-day cycle anchored to a fixed epoch (not per-visitor), so every
+  // visitor sees the identical countdown and it loops forever with no manual resets.
+  var refCycleSec=7*24*3600;
+  var refEpochSec=Math.floor(Date.UTC(2026,0,1,0,0,0)/1000);
+  function refTick(){var nowSec=Math.floor(Date.now()/1000);var elapsed=((nowSec-refEpochSec)%refCycleSec+refCycleSec)%refCycleSec;var n=refCycleSec-elapsed;var vals=[Math.floor(n/86400),Math.floor(n%86400/3600),Math.floor(n%3600/60),n%60];['days','hours','minutes','seconds'].forEach(function(k,i){root.querySelector('#ref-'+k).textContent=String(vals[i]).padStart(2,'0');});}
   refTick();window.setInterval(refTick,1000);
 
 
