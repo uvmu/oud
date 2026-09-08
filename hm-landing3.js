@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.2.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.2.1 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -3128,7 +3128,8 @@ html=refPolished.innerHTML;
     if(hmSdkEventsBound)return;
     var events=sdk.cart.event || sdk.event && sdk.event.cart;
     if(!events)return;hmSdkEventsBound=true;
-    ['onItemAdded','onItemUpdated','onItemDeleted','onUpdated'].forEach(function(name){if(typeof events[name]==='function')events[name](function(){hmRefreshCartFromSdk();});});
+    if(typeof events.onItemAdded==='function')events.onItemAdded(function(response){hmRefreshCartFromSdk(response);});
+    ['onItemUpdated','onItemDeleted','onUpdated'].forEach(function(name){if(typeof events[name]==='function')events[name](function(response){window.setTimeout(function(){hmRefreshCartFromSdk(response);},0);});});
     if(typeof events.onItemAddedFailed==='function')events.onItemAddedFailed(function(error,pid){
       // The direct request catch handles our pending actions, avoiding duplicate alerts.
       if(Object.keys(hmPendingAdds).length)return;
@@ -3143,7 +3144,7 @@ html=refPolished.innerHTML;
     hmPendingAdds[pid]=true;hmSetAddBusy(pid,true);
     hmWaitForCart().then(function(sdk){hmBindSdkCartEvents(sdk);return sdk.cart.addItem({id:Number(pid),quantity:1});})
       .then(hmRequireCartSuccess)
-      .then(function(){hmBumpCartFeedback(1,pid);hmToast('تمت الإضافة للسلة بنجاح');return hmRefreshCartFromSdk();})
+      .then(function(response){hmBumpCartFeedback(1,pid);hmToast('تمت الإضافة للسلة بنجاح');return hmRefreshCartFromSdk(response);})
       .catch(function(error){hmToast(hmCartErrorMessage(error),true);})
       .finally(function(){delete hmPendingAdds[pid];hmSetAddBusy(pid,false);});
   });
@@ -3508,16 +3509,33 @@ html=refPolished.innerHTML;
     hmRenderCartState();
   }
 
-  function hmFetchCartFromSdk() {
+  function hmReadStoredCartSummary() {
     var sdk=hmGetCartSdk();
-    return sdk && typeof sdk.cart.details==='function' ? sdk.cart.details() : null;
+    var storage=sdk && (sdk.storage || sdk.store);
+    if(!storage || typeof storage.get!=='function')return Promise.resolve(null);
+    var keys=['cart.summary','cart.summery'];
+    function readAt(index){
+      if(index>=keys.length)return Promise.resolve(null);
+      var value;
+      try{value=storage.get(keys[index]);}catch(error){return readAt(index+1);}
+      return Promise.resolve(value).then(function(result){return result || readAt(index+1);},function(){return readAt(index+1);});
+    }
+    return readAt(0);
   }
 
-  function hmRefreshCartFromSdk() {
+  function hmHasCartSummaryData(value) {
+    if(!value || typeof value!=='object')return false;
+    var nested=value.cart || value.data && (value.data.cart || value.data) || value;
+    if(!nested || typeof nested!=='object')return false;
+    return Array.isArray(nested.items) || Array.isArray(nested.products) || ['count','items_count','products_count','total','total_amount','grand_total'].some(function(key){return Object.prototype.hasOwnProperty.call(nested,key);});
+  }
+
+  function hmRefreshCartFromSdk(response) {
     var serial=++hmCartRefreshSerial;
-    return Promise.resolve().then(hmFetchCartFromSdk).then(function(response){
-      if(response && serial===hmCartRefreshSerial)hmApplyCartSnapshot(hmExtractCartSnapshot(response));
-      return response;
+    var source=response ? Promise.resolve(response) : hmReadStoredCartSummary();
+    return source.then(function(cartState){
+      if(hmHasCartSummaryData(cartState) && serial===hmCartRefreshSerial)hmApplyCartSnapshot(hmExtractCartSnapshot(cartState));
+      return cartState;
     }).catch(function(){return null;});
   }
 
@@ -3630,9 +3648,9 @@ html=refPolished.innerHTML;
 
     var cartFloatBtn = event.target && event.target.closest ? event.target.closest('#hm-cart-float') : null;
     if (cartFloatBtn && root.contains(cartFloatBtn)) {
+      if(!hmCartItems.length)return;
       event.preventDefault();
       hmSetCartModalState(true);
-      hmRefreshCartFromSdk();
       return;
     }
 
