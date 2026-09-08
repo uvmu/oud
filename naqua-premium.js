@@ -1,4 +1,4 @@
-/* naqua-premium.js — Naqua Premium standalone homepage presentation | v1.0.0
+/* naqua-premium.js — Naqua Premium standalone homepage presentation | v1.0.1
    Standalone, homepage-only Salla presentation.
    Install in Salla Custom JavaScript, without script tags. */
 (() => {
@@ -45,6 +45,7 @@ function start(){
  observer=new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{refresh();render();},250);});
  const nativeMain=document.querySelector('main#main-content');if(nativeMain)observer.observe(nativeMain,{childList:true,subtree:true,attributes:true,attributeFilter:['product']});
 }
-window.NaquaPremium={version:'1.0.0',destroy(){observer?.disconnect();clearTimeout(timer);document.removeEventListener('DOMContentLoaded',start);host?.remove();hidden.forEach(({el,style})=>style===null?el.removeAttribute('style'):el.setAttribute('style',style));delete window.NaquaPremium;}};
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+window.NaquaPremium={version:'1.0.1',destroy(){observer?.disconnect();clearTimeout(timer);document.removeEventListener('DOMContentLoaded',start);host?.remove();hidden.forEach(({el,style})=>style===null?el.removeAttribute('style'):el.setAttribute('style',style));delete window.NaquaPremium;}};
+function boot(){if(document.body)start();else document.addEventListener('DOMContentLoaded',start,{once:true});}
+boot();
 })();
