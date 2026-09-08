@@ -1,11 +1,11 @@
-/* naqua-product-premium.js — Naqua Product Premium product-page presentation | v1.0.1
+/* naqua-product-premium.js — Naqua Product Premium product-page presentation | v1.0.2
    Install alongside homepage script.
    Preserves native Salla form, gallery, options, pricing and SDK handlers. */
 (() => {
 'use strict';
 if(window.NaquaProductPremium) return;
 const changes=[],added=[];let observer,timeout,mounted=false,stopped=false;
-const state=window.NaquaProductPremium={version:'1.0.1',status:'waiting',destroy(){stopped=true;observer?.disconnect();clearTimeout(timeout);document.removeEventListener('DOMContentLoaded',boot);added.reverse().forEach(n=>n.remove());changes.reverse().forEach(fn=>fn());delete window.NaquaProductPremium;}};
+const state=window.NaquaProductPremium={version:'1.0.2',status:'waiting',destroy(){stopped=true;observer?.disconnect();clearTimeout(timeout);document.removeEventListener('DOMContentLoaded',boot);added.reverse().forEach(n=>n.remove());changes.reverse().forEach(fn=>fn());delete window.NaquaProductPremium;}};
 const add=n=>(added.push(n),n);
 const cls=(el,name)=>{if(el&&!el.classList.contains(name)){el.classList.add(name);changes.push(()=>el.classList.remove(name));}};
 function move(el,parent){if(!el)return;const marker=document.createComment('naqua-original');el.before(marker);parent.append(el);changes.push(()=>{marker.replaceWith(el);});}
