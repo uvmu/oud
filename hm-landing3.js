@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.2.1 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.3.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -955,7 +955,11 @@
   var CDN = 'https://cdn.salla.sa/zvoeKA/';
 
   function sBtn(id, label) {
-    return '<button type="button" class="hm-add-button" data-hm-add="'+id+'" aria-busy="false"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span>'+label+'</span></button>';
+    return '<salla-add-product-button' +
+      ' product-id="' + id + '"' +
+      ' width="wide">' +
+      '<i class="sicon-shopping-bag2"></i> ' + label +
+      '</salla-add-product-button>';
   }
 
   function hmWaHref(message) {
@@ -3091,63 +3095,118 @@ html=refPolished.innerHTML;
 
 
 
-  /* Official integration: docs.salla.dev/422629m0 and /422610m0.
-     Each request uses addItem({id,quantity}); events reconcile the server cart.
-     No fetch/XHR rewriting, speculative retries, or fake successful cart state. */
-  var hmPendingAdds=Object.create(null),hmCartMutationBusy=false,hmCartRefreshSerial=0,hmSdkEventsBound=false;
-  function hmGetCartSdk(){
-    return window.salla && window.salla.cart ? window.salla : window.Salla && window.Salla.cart ? window.Salla : null;
-  }
-  function hmWaitForCart(){
-    return new Promise(function(resolve,reject){
-      var elapsed=0;
-      function check(){var sdk=hmGetCartSdk();if(sdk&&typeof sdk.cart.addItem==='function'){resolve(sdk);return;}if(elapsed>=8000){reject(new Error('تعذر تحميل السلة. يرجى تحديث الصفحة والمحاولة مرة أخرى.'));return;}elapsed+=100;window.setTimeout(check,100);}
-      check();
-    });
-  }
+  /* Official integration: use the native <salla-add-product-button> web component
+     for adding items (docs.salla.dev/422629m0). Calling sdk.cart.addItem() directly
+     from application code hits an internal Salla SDK bug ("Converting circular
+     structure to JSON" inside its before-add-item analytics hook) and leaves the
+     local cart state out of sync — let the component own the add/before/after
+     lifecycle and only react to its success/error DOM events. */
+  var hmCartMutationBusy=false;
   function hmCartErrorMessage(error){
     var data=error && (error.response && error.response.data || error.data || error);
     var message=typeof data==='string'?data:data && (data.message || data.error && data.error.message || data.error_description);
     if(typeof message!=='string' || !message.trim())message='تعذرت العملية. يرجى المحاولة مجدداً أو فتح صفحة المنتج لاختيار الخيارات المطلوبة.';
     var plain=document.createElement('div');plain.innerHTML=message;return plain.textContent || message;
   }
-  function hmRequireCartSuccess(response){
-    if(response && (response.success===false || response.status==='error' || Number(response.status)>=400 || response.data && response.data.success===false))throw response;
-    return response;
+
+  function hmNormalizeAddProductButtons() {
+    var addButtons = root.querySelectorAll('salla-add-product-button');
+    for (var b = 0; b < addButtons.length; b++) {
+      var host = addButtons[b];
+      if (!host || host.getAttribute('data-hm-btn-fixed') === '1') continue;
+
+      var wrappers = host.querySelectorAll('.w-full, salla-button, .s-button-wrap');
+      for (var w = 0; w < wrappers.length; w++) {
+        wrappers[w].style.setProperty('display', 'block', 'important');
+        wrappers[w].style.setProperty('width', '100%', 'important');
+        wrappers[w].style.setProperty('height', 'auto', 'important');
+        wrappers[w].style.setProperty('min-height', '0', 'important');
+        wrappers[w].style.setProperty('margin', '0', 'important');
+        wrappers[w].style.setProperty('padding', '0', 'important');
+      }
+
+      var nativeButton = host.querySelector('button.s-button-element');
+      if (nativeButton) {
+        nativeButton.style.setProperty('height', '54px', 'important');
+        nativeButton.style.setProperty('min-height', '54px', 'important');
+        nativeButton.style.setProperty('max-height', '54px', 'important');
+        nativeButton.style.setProperty('display', 'flex', 'important');
+        nativeButton.style.setProperty('align-items', 'center', 'important');
+        nativeButton.style.setProperty('justify-content', 'center', 'important');
+        nativeButton.style.setProperty('padding', '0 12px', 'important');
+        nativeButton.style.setProperty('border-radius', '14px', 'important');
+        nativeButton.style.setProperty('background', 'var(--hm-brand)', 'important');
+        nativeButton.style.setProperty('border-color', 'var(--hm-brand)', 'important');
+        nativeButton.style.setProperty('color', '#fff', 'important');
+      }
+
+      host.setAttribute('data-hm-btn-fixed', '1');
+    }
   }
-  function hmSetAddBusy(pid,busy){
-    root.querySelectorAll('[data-hm-add]').forEach(function(button){
-      if(button.getAttribute('data-hm-add')!==String(pid))return;
-      button.disabled=busy;button.setAttribute('aria-busy',String(busy));
-      var label=button.querySelector('span');if(!label)return;
-      if(!button.hasAttribute('data-hm-label'))button.setAttribute('data-hm-label',label.textContent);
-      label.textContent=busy?'جارٍ الإضافة…':button.getAttribute('data-hm-label');
+
+  if (window.customElements && window.customElements.upgrade) {
+    var hmInitBtns = root.querySelectorAll('salla-add-product-button');
+    for (var hmI = 0; hmI < hmInitBtns.length; hmI++) {
+      try { window.customElements.upgrade(hmInitBtns[hmI]); } catch (e) {}
+    }
+  }
+
+  var hmLastAddWasSuccess = false;
+
+  function hmOnAddButtonSuccess(event) {
+    hmLastAddWasSuccess = true;
+    window.setTimeout(function () { hmLastAddWasSuccess = false; }, 2000);
+    var host = event && event.currentTarget ? event.currentTarget : null;
+    var detail = event && event.detail ? event.detail : {};
+    var pid = detail.product_id || detail.productId || detail.id || (detail.item && (detail.item.product_id || detail.item.productId || detail.item.id)) || (host && (host.getAttribute('product-id') || host.getAttribute('product_id')));
+    var qty = detail.quantity || detail.qty || (detail.item && detail.item.quantity) || 1;
+    hmHandleSuccessfulAdd(pid, qty);
+  }
+
+  function hmBindAddProductButtonEvents() {
+    var addButtons = root.querySelectorAll('salla-add-product-button');
+    for (var b = 0; b < addButtons.length; b++) {
+      var host = addButtons[b];
+      if (!host || host.getAttribute('data-hm-add-bound') === '1') continue;
+      host.setAttribute('data-hm-add-bound', '1');
+      host.addEventListener('success', hmOnAddButtonSuccess);
+      host.addEventListener('error', function (e) {
+        var d = (e && e.detail) ? e.detail : {};
+        var msg = (d.message || d.error || '').toLowerCase();
+        if (msg.indexOf('out_of_stock') !== -1 || msg.indexOf('unavailable') !== -1 || msg.indexOf('نفدت') !== -1) {
+          var cact = e.currentTarget ? e.currentTarget.closest('.hm-cact') : null;
+          if (cact) { hmMarkOos(cact); hmToast('نفدت الكمية — هذا المنتج غير متوفر حالياً', true); }
+        }
+      });
+    }
+  }
+
+  root.addEventListener('click', function (e) {
+    var btn = e.target && e.target.closest ? e.target.closest('salla-add-product-button, button') : null;
+    if (!btn) return;
+    var act = btn.closest ? btn.closest('.hm-cact') : null;
+    if (act && act.classList.contains('hm-oos')) {
+      e.stopPropagation();
+      e.preventDefault();
+      hmToast('نفدت الكمية — هذا المنتج غير متوفر حالياً', true);
+    }
+  }, true);
+
+  hmNormalizeAddProductButtons();
+  hmBindAddProductButtonEvents();
+
+  if ('MutationObserver' in window) {
+    var hmBtnFixTimer = 0;
+    var hmBtnFixObserver = new MutationObserver(function () {
+      if (hmBtnFixTimer) return;
+      hmBtnFixTimer = window.setTimeout(function () {
+        hmBtnFixTimer = 0;
+        hmNormalizeAddProductButtons();
+        hmBindAddProductButtonEvents();
+      }, 30);
     });
+    hmBtnFixObserver.observe(root, { childList: true, subtree: true });
   }
-  function hmBindSdkCartEvents(sdk){
-    if(hmSdkEventsBound)return;
-    var events=sdk.cart.event || sdk.event && sdk.event.cart;
-    if(!events)return;hmSdkEventsBound=true;
-    if(typeof events.onItemAdded==='function')events.onItemAdded(function(response){hmRefreshCartFromSdk(response);});
-    ['onItemUpdated','onItemDeleted','onUpdated'].forEach(function(name){if(typeof events[name]==='function')events[name](function(response){window.setTimeout(function(){hmRefreshCartFromSdk(response);},0);});});
-    if(typeof events.onItemAddedFailed==='function')events.onItemAddedFailed(function(error,pid){
-      // The direct request catch handles our pending actions, avoiding duplicate alerts.
-      if(Object.keys(hmPendingAdds).length)return;
-      if(pid&&localProductMeta[String(pid)])hmToast(hmCartErrorMessage(error),true);
-    });
-  }
-  root.addEventListener('click',function(event){
-    var button=event.target.closest('[data-hm-add]');
-    if(!button||!root.contains(button))return;
-    event.preventDefault();
-    var pid=button.getAttribute('data-hm-add');if(hmPendingAdds[pid])return;
-    hmPendingAdds[pid]=true;hmSetAddBusy(pid,true);
-    hmWaitForCart().then(function(sdk){hmBindSdkCartEvents(sdk);return sdk.cart.addItem({id:Number(pid),quantity:1});})
-      .then(hmRequireCartSuccess)
-      .then(function(response){hmBumpCartFeedback(1,pid);hmToast('تمت الإضافة للسلة بنجاح');return hmRefreshCartFromSdk(response);})
-      .catch(function(error){hmToast(hmCartErrorMessage(error),true);})
-      .finally(function(){delete hmPendingAdds[pid];hmSetAddBusy(pid,false);});
-  });
 
   function hmToast(msg, isErr) {
     var t = root.querySelector('#hm-toast');
@@ -3166,7 +3225,22 @@ html=refPolished.innerHTML;
   var hmLastAddSignal = { pid: '', at: 0 };
 
   function hmHandleSuccessfulAdd(pid, qty) {
-    hmRefreshCartFromSdk();
+    var normalizedPid = pid ? String(pid) : '';
+    var normalizedQty = Math.max(1, parseInt(qty || 1, 10) || 1);
+    var now = Date.now();
+
+    if (normalizedPid && hmLastAddSignal.pid === normalizedPid && (now - hmLastAddSignal.at) < 900) {
+      return;
+    }
+
+    if (normalizedPid) {
+      hmLastAddSignal.pid = normalizedPid;
+      hmLastAddSignal.at = now;
+      hmBumpCartFeedback(normalizedQty, normalizedPid);
+    }
+
+    hmToast('تمت الإضافة للسلة بنجاح ✓');
+    window.setTimeout(hmRefreshCartFromSdk, normalizedPid ? 450 : 120);
   }
 
   function hmFormatMoney(value) {
@@ -3283,23 +3357,43 @@ html=refPolished.innerHTML;
   }
 
   function hmSyncCartItemQuantityWithSdk(item, nextQty) {
-    return hmWaitForCart().then(function(sdk){
-      if (!item.cartItemId || typeof sdk.cart.updateItem !== 'function') throw new Error('يرجى تعديل الكمية من صفحة السلة.');
-      return sdk.cart.updateItem({ id:item.cartItemId, quantity:nextQty });
-    }).then(hmRequireCartSuccess);
+    var sdk = window.Salla || window.salla;
+    var cid = item && item.cartItemId;
+    if (!sdk || !sdk.cart || !cid || nextQty < 1) return Promise.reject(new Error('missing-update-target'));
+
+    return hmTrySdkCalls([
+      function () { return (typeof sdk.cart.updateItem === 'function') ? sdk.cart.updateItem(cid, nextQty) : null; },
+      function () { return (typeof sdk.cart.update === 'function') ? sdk.cart.update(cid, nextQty) : null; },
+      function () { return (typeof sdk.cart.changeQuantity === 'function') ? sdk.cart.changeQuantity(cid, nextQty) : null; },
+      function () { return (typeof sdk.cart.updateItem === 'function') ? sdk.cart.updateItem({ id: cid, quantity: nextQty }) : null; },
+      function () { return (typeof sdk.cart.update === 'function') ? sdk.cart.update({ id: cid, quantity: nextQty }) : null; }
+    ]);
   }
 
   function hmIncreaseCartItemWithSdk(item) {
-    return hmWaitForCart().then(function(sdk){
-      return sdk.cart.addItem({ id:Number(item.productId || item.id), quantity:1 });
-    }).then(hmRequireCartSuccess);
+    var sdk = window.Salla || window.salla;
+    var pid = item && (item.productId || item.id);
+    if (!sdk || !sdk.cart || !pid) return Promise.reject(new Error('missing-add-target'));
+
+    return hmTrySdkCalls([
+      function () { return (typeof sdk.cart.addItem === 'function') ? sdk.cart.addItem(pid, 1) : null; },
+      function () { return (typeof sdk.cart.add === 'function') ? sdk.cart.add(pid, 1) : null; },
+      function () { return (typeof sdk.cart.addItem === 'function') ? sdk.cart.addItem({ product_id: pid, quantity: 1 }) : null; },
+      function () { return (typeof sdk.cart.add === 'function') ? sdk.cart.add({ product_id: pid, quantity: 1 }) : null; }
+    ]);
   }
 
   function hmDeleteCartItemWithSdk(item) {
-    return hmWaitForCart().then(function(sdk){
-      if (!item.cartItemId || typeof sdk.cart.deleteItem !== 'function') throw new Error('يرجى حذف المنتج من صفحة السلة.');
-      return sdk.cart.deleteItem(item.cartItemId);
-    }).then(hmRequireCartSuccess);
+    var sdk = window.Salla || window.salla;
+    var cid = item && item.cartItemId;
+    if (!sdk || !sdk.cart || !cid) return Promise.reject(new Error('missing-delete-target'));
+
+    return hmTrySdkCalls([
+      function () { return (typeof sdk.cart.deleteItem === 'function') ? sdk.cart.deleteItem(cid) : null; },
+      function () { return (typeof sdk.cart.removeItem === 'function') ? sdk.cart.removeItem(cid) : null; },
+      function () { return (typeof sdk.cart.delete === 'function') ? sdk.cart.delete(cid) : null; },
+      function () { return (typeof sdk.cart.remove === 'function') ? sdk.cart.remove(cid) : null; }
+    ]);
   }
 
   function hmHandleCartItemAction(action, itemKey) {
@@ -3509,34 +3603,48 @@ html=refPolished.innerHTML;
     hmRenderCartState();
   }
 
-  function hmReadStoredCartSummary() {
-    var sdk=hmGetCartSdk();
-    var storage=sdk && (sdk.storage || sdk.store);
-    if(!storage || typeof storage.get!=='function')return Promise.resolve(null);
-    var keys=['cart.summary','cart.summery'];
-    function readAt(index){
-      if(index>=keys.length)return Promise.resolve(null);
-      var value;
-      try{value=storage.get(keys[index]);}catch(error){return readAt(index+1);}
-      return Promise.resolve(value).then(function(result){return result || readAt(index+1);},function(){return readAt(index+1);});
+  function hmFetchCartFromSdk() {
+    if (typeof salla !== 'undefined' && salla.cart && typeof salla.cart.details === 'function') {
+      return salla.cart.details();
     }
-    return readAt(0);
+    return null;
   }
 
-  function hmHasCartSummaryData(value) {
-    if(!value || typeof value!=='object')return false;
-    var nested=value.cart || value.data && (value.data.cart || value.data) || value;
-    if(!nested || typeof nested!=='object')return false;
-    return Array.isArray(nested.items) || Array.isArray(nested.products) || ['count','items_count','products_count','total','total_amount','grand_total'].some(function(key){return Object.prototype.hasOwnProperty.call(nested,key);});
-  }
+  function hmRefreshCartFromSdk() {
+    function refreshFromCartPage() {
+      if (typeof fetch !== 'function') {
+        hmApplyCartSnapshot(hmExtractCartSnapshotFromDocument(document));
+        return;
+      }
 
-  function hmRefreshCartFromSdk(response) {
-    var serial=++hmCartRefreshSerial;
-    var source=response ? Promise.resolve(response) : hmReadStoredCartSummary();
-    return source.then(function(cartState){
-      if(hmHasCartSummaryData(cartState) && serial===hmCartRefreshSerial)hmApplyCartSnapshot(hmExtractCartSnapshot(cartState));
-      return cartState;
-    }).catch(function(){return null;});
+      fetch(cartUrl, { credentials: 'same-origin' })
+        .then(function (res) { return res.text(); })
+        .then(function (htmlText) {
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(htmlText, 'text/html');
+          hmApplyCartSnapshot(hmExtractCartSnapshotFromDocument(doc));
+        })
+        .catch(function () {
+          hmApplyCartSnapshot(hmExtractCartSnapshotFromDocument(document));
+        });
+    }
+
+    var pending = hmFetchCartFromSdk();
+    if (!pending || typeof pending.then !== 'function') {
+      refreshFromCartPage();
+      return;
+    }
+
+    pending.then(function (response) {
+      var snapshot = hmExtractCartSnapshot(response);
+      if ((snapshot.items && snapshot.items.length) || snapshot.count > 0 || snapshot.total > 0) {
+        hmApplyCartSnapshot(snapshot);
+      } else {
+        refreshFromCartPage();
+      }
+    }).catch(function () {
+      refreshFromCartPage();
+    });
   }
 
   function hmMarkOos(cact) {
@@ -3551,10 +3659,19 @@ html=refPolished.innerHTML;
   }
 
   function hmInitCartStateFromSdk() {
-    hmWaitForCart().then(function(sdk){
-      hmBindSdkCartEvents(sdk);
-      return hmRefreshCartFromSdk();
-    }).catch(function(){ /* Clicks show a useful SDK-readiness error. */ });
+    if (window.Salla && typeof window.Salla.onReady === 'function') {
+      window.Salla.onReady(function () {
+        hmRefreshCartFromSdk();
+      });
+    } else {
+      hmRefreshCartFromSdk();
+    }
+
+    if (window.salla && window.salla.event && window.salla.event.cart && typeof window.salla.event.cart.onDetailsFetched === 'function') {
+      window.salla.event.cart.onDetailsFetched(function (response) {
+        hmApplyCartSnapshot(hmExtractCartSnapshot(response));
+      });
+    }
   }
 
   function hmRenderCartState() {
