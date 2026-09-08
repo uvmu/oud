@@ -1,4 +1,4 @@
-/* naqua-premium.js — Naqua Premium standalone homepage presentation | v1.0.1
+/* naqua-premium.js — Naqua Premium standalone homepage presentation | v1.1.0
    Standalone, homepage-only Salla presentation.
    Install in Salla Custom JavaScript, without script tags. */
 (() => {
@@ -30,6 +30,9 @@ function start(){
  <section class="ritual" id="ritual"><img src="${esc(products[7].image.url)}" alt="${esc(t(products[7].name,titles[7]))}" loading="lazy"><div><span class="eyebrow">${t('للقهوة رفيق','BETTER TOGETHER')}</span><h2>${t('قهوة تُصبّ.<br>وحلاوة تُشارك.','Pour the coffee.<br>Pass the sweetness.')}</h2><p>${t('خلاص محشي باللوز، يجمع طعم التمر وحلاوة التفاصيل. ضيافة بسيطة تترك أثراً جميلاً.','Almond-filled Khalas brings a little crunch to a familiar sweetness. A simple addition to your next gathering.')}</p><a class="pill" href="${esc(products[7].url)}">${t('اكتشف الخلاص المحشي','Explore almond-filled Khalas')} ${icon('arrow')}</a></div></section>
  </main><footer><div class="footer-brand">${t('نقوة النخيل','Naquat Al Nakhil')}<p>${t('من خير الأرض، لكرم الضيافة.','From the land. For your table.')}</p></div><a href="#collection">${t('تسوّق التشكيلة','Shop the collection')}</a><a href="/cart">${t('سلة المشتريات','Shopping bag')}</a><span>© ${new Date().getFullYear()} ${t('نقوة النخيل','Naquat Al Nakhil')}</span></footer>
  <nav class="dock" aria-label="${t('التنقل السريع','Quick navigation')}"><a href="#top">${icon('home')}<span>${t('الرئيسية','Home')}</span></a><a href="#collection">${icon('search')}<span>${t('التشكيلة','Collection')}</span></a><a href="/cart">${icon('bag')}<span>${t('السلة','Bag')}</span></a></nav></div>`;
+ const typeStyle=document.createElement('style');
+ typeStyle.textContent=':host,.page{font-family:Amazon-Ember,Amazon-Ember-Medium,sans-serif!important}h1,h2,h3,.footer-brand{font-family:Amazon-Ember-Bold,Amazon-Ember,sans-serif!important;font-weight:700!important}h1{line-height:1.16!important;letter-spacing:-.025em!important}h2{line-height:1.35!important;letter-spacing:-.015em!important}h3{font-weight:500!important;line-height:1.5!important}.hero-copy p,.ritual p{line-height:1.75!important}';
+ root.appendChild(typeStyle);
  let filter='all', query='';
  function render(){
  const list=products.filter(p=> (!query || `${p.name} ${p.english}`.toLowerCase().includes(query)) && (filter==='all'||(filter==='sukkari'?/سكري/:filter==='khalas'?/خلاص/:/شعثاء|بكج/).test(p.name)));
@@ -45,7 +48,7 @@ function start(){
  observer=new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{refresh();render();},250);});
  const nativeMain=document.querySelector('main#main-content');if(nativeMain)observer.observe(nativeMain,{childList:true,subtree:true,attributes:true,attributeFilter:['product']});
 }
-window.NaquaPremium={version:'1.0.1',destroy(){observer?.disconnect();clearTimeout(timer);document.removeEventListener('DOMContentLoaded',start);host?.remove();hidden.forEach(({el,style})=>style===null?el.removeAttribute('style'):el.setAttribute('style',style));delete window.NaquaPremium;}};
+window.NaquaPremium={version:'1.1.0',destroy(){observer?.disconnect();clearTimeout(timer);document.removeEventListener('DOMContentLoaded',start);host?.remove();hidden.forEach(({el,style})=>style===null?el.removeAttribute('style'):el.setAttribute('style',style));delete window.NaquaPremium;}};
 function boot(){if(document.body)start();else document.addEventListener('DOMContentLoaded',start,{once:true});}
 boot();
 })();
