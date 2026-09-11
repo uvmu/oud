@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.6.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.7.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1418,7 +1418,7 @@
   ].join(''))+'</style><div id="hm-lp" class="hm-lp"><div class="ref-page" style="--ref-art:url('+refArt+')">'+
   '<div class="ref-announcement">التوصيل لجميع مناطق المملكة &nbsp; '+refIcon('shipping')+' &nbsp; عروض اليوم الوطني لفترة محدودة</div>'+
   '<header class="ref-nav"><a class="ref-logo" href="'+baseUrl+'">Hamtāro</a><nav aria-label="التنقل الرئيسي"><a href="#">الرئيسية</a><a href="#hm-products">البوكسات</a><a href="#hm-products" data-ref-all>المنتجات</a><a href="#hm-products">عروض اليوم الوطني</a><a href="'+hmWaHref('أريد تتبع طلبي')+'">تتبع الطلب</a></nav><div class="ref-nav-actions">'+refOverlay[0]+'</div></header>'+
-  '<section class="hm-hero ref-hero"><div class="ref-hero-copy"><h1>احتفل باليوم الوطني<br>مع قطتك</h1><p>بوكسات وطنية بتوفير استثنائي</p><a class="ref-pill" href="#hm-products">إصدار محدود لفترة الاحتفال</a><div class="ref-countdown">العرض ينتهي خلال<div class="ref-clock"><div><b id="ref-days">00</b><small>أيام</small></div><div><b id="ref-hours">00</b><small>ساعات</small></div><div><b id="ref-minutes">00</b><small>دقيقة</small></div><div><b id="ref-seconds">00</b><small>ثانية</small></div></div></div></div><div class="ref-art ref-hero-art" role="img" aria-label="قط بجانب بوكس هامتارو الأخضر لليوم الوطني"></div></section>'+
+  '<section class="hm-hero ref-hero ref-hero-imgonly"><a class="ref-hero-link" href="#hm-products" aria-label="تسوق عروض اليوم الوطني"><div class="ref-art ref-hero-art" role="img" aria-label="بوكسات اليوم الوطني - عروض حصرية بمناسبة اليوم الوطني"></div><div class="ref-countdown ref-countdown-float">العرض ينتهي خلال<div class="ref-clock"><div><b id="ref-days">00</b><small>أيام</small></div><div><b id="ref-hours">00</b><small>ساعات</small></div><div><b id="ref-minutes">00</b><small>دقيقة</small></div><div><b id="ref-seconds">00</b><small>ثانية</small></div></div></div></a></section>'+
   '<div class="ref-benefits"><div>'+refIcon('shield-check')+'<span><b>منتجات أصلية</b><small>جودة مضمونة لراحة بالك</small></span></div><div>'+refIcon('discount')+'<span><b>توفير أكبر</b><small>أسعار أفضل في البوكسات</small></span></div><div>'+refIcon('shipping')+'<span><b>التوصيل لجميع مناطق المملكة</b><small>سريع وآمن إلى باب بيتك</small></span></div></div>'+
   '<section class="ref-products" id="hm-products"><div class="ref-product-head"><h2>اختاري البوكس المناسب</h2><div class="ref-filters" role="group" aria-label="نوع القطة">'+[['featured','الكل'],['kitten','القطط الصغيرة'],['adult','القطط البالغة'],['dogs','كلاب']].map(function(f){return '<button type="button" class="ref-filter" data-ref-filter="'+f[0]+'" aria-pressed="'+(f[0]==='featured')+'">'+f[1]+'</button>';}).join('')+'</div></div><div class="ref-grid">'+refCards(refOrder.slice(0,4))+'</div><button type="button" class="ref-more" data-ref-all>عرض جميع البوكسات</button></section>'+
   '<section class="ref-feature"><div class="ref-feature-copy"><h2>الأكثر طلباً</h2><h3>بوكس طعام القطط المعقمة</h3><div class="ref-inclusions">'+[['box','6 أنواع من أجود الماركات'],['star','دعم صحة المسالك البولية'],['check-circle','بدون ألوان أو مواد حافظة'],['gift','مناسب لجميع الأعمار']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.sterilisedBox,'أضيفيه للسلة - 200 ر.س')+'</div><div class="ref-art ref-feature-art" role="img" aria-label="بوكس طعام القطط المعقمة"></div></section>'+
@@ -1651,10 +1651,62 @@
   var heroArtEl=refPolished.querySelector('.ref-hero-art');
   if(heroArtEl){
     heroArtEl.style.setProperty('aspect-ratio',HERO_BANNER_RATIO,'important');
+    heroArtEl.style.setProperty('width','100%','important');
     heroArtEl.style.setProperty('height','auto','important');
     heroArtEl.style.setProperty('min-height','0','important');
-    heroArtEl.style.setProperty('background-size','contain','important');
+    heroArtEl.style.setProperty('background-size','cover','important');
     heroArtEl.style.setProperty('align-self','center','important');
+    heroArtEl.style.setProperty('border-radius','18px','important');
+  }
+  var heroSectionEl=refPolished.querySelector('.ref-hero-imgonly');
+  if(heroSectionEl){
+    heroSectionEl.style.setProperty('display','block','important');
+    heroSectionEl.style.setProperty('min-height','0','important');
+    heroSectionEl.style.setProperty('background','none','important');
+  }
+  var heroLinkEl=refPolished.querySelector('.ref-hero-link');
+  if(heroLinkEl){
+    heroLinkEl.style.setProperty('position','relative','important');
+    heroLinkEl.style.setProperty('display','block','important');
+    heroLinkEl.style.setProperty('text-decoration','none','important');
+  }
+  var countdownFloatEl=refPolished.querySelector('.ref-countdown-float');
+  if(countdownFloatEl){
+    countdownFloatEl.style.setProperty('position','absolute','important');
+    countdownFloatEl.style.setProperty('bottom','16px','important');
+    countdownFloatEl.style.setProperty('right','16px','important');
+    countdownFloatEl.style.setProperty('left','auto','important');
+    countdownFloatEl.style.setProperty('background','rgba(255,255,255,.95)','important');
+    countdownFloatEl.style.setProperty('border-radius','14px','important');
+    countdownFloatEl.style.setProperty('padding','10px 16px','important');
+    countdownFloatEl.style.setProperty('box-shadow','0 8px 24px rgba(0,0,0,.2)','important');
+    countdownFloatEl.style.setProperty('z-index','2','important');
+    countdownFloatEl.style.setProperty('max-width','280px','important');
+    countdownFloatEl.style.setProperty('font-size','13px','important');
+    countdownFloatEl.style.setProperty('text-align','center','important');
+    countdownFloatEl.style.setProperty('white-space','nowrap','important');
+    var floatClockEl=countdownFloatEl.querySelector('.ref-clock');
+    if(floatClockEl){
+      floatClockEl.style.setProperty('display','flex','important');
+      floatClockEl.style.setProperty('gap','10px','important');
+      floatClockEl.style.setProperty('justify-content','center','important');
+      Array.prototype.forEach.call(floatClockEl.children,function(box){
+        box.style.setProperty('display','flex','important');
+        box.style.setProperty('flex-direction','column','important');
+        box.style.setProperty('align-items','center','important');
+        box.style.setProperty('gap','2px','important');
+        var b=box.querySelector('b'),small=box.querySelector('small');
+        if(b){b.style.setProperty('font-size','17px','important');b.style.setProperty('line-height','1','important');}
+        if(small){small.style.setProperty('font-size','10px','important');small.style.setProperty('white-space','nowrap','important');}
+      });
+    }
+  }
+  var featureArtEl=refPolished.querySelector('.ref-feature-art');
+  if(featureArtEl){
+    featureArtEl.style.setProperty('aspect-ratio','800 / 1000','important');
+    featureArtEl.style.setProperty('height','auto','important');
+    featureArtEl.style.setProperty('min-height','0','important');
+    featureArtEl.style.setProperty('background-size','cover','important');
   }
   var hmArtworkStyle=document.createElement('style');hmArtworkStyle.textContent=hmDecodeCss('I2htLWxwIC5yZWYtaGVyb3tncmlkLXRlbXBsYXRlLWNvbHVtbnM6NDIlIDU4JSFpbXBvcnRhbnQ7bWluLWhlaWdodDo1NTBweCFpbXBvcnRhbnQ7YXNwZWN0LXJhdGlvOmF1dG8haW1wb3J0YW50O2JhY2tncm91bmQ6I2Y3ZjFlNSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtaGVyby1hcnQuaG0tZW5oYW5jZWQtYXJ0e3Bvc2l0aW9uOnJlbGF0aXZlIWltcG9ydGFudDtpbnNldDphdXRvIWltcG9ydGFudDtncmlkLWNvbHVtbjoyO2dyaWQtcm93OjE7aGVpZ2h0OjEwMCUhaW1wb3J0YW50O21pbi1oZWlnaHQ6NTUwcHg7YXNwZWN0LXJhdGlvOmF1dG8haW1wb3J0YW50O2JhY2tncm91bmQtc2l6ZTpjb250YWluIWltcG9ydGFudDtiYWNrZ3JvdW5kLXBvc2l0aW9uOmNlbnRlciFpbXBvcnRhbnQ7ei1pbmRleDowIWltcG9ydGFudH0jaG0tbHAgLnJlZi1oZXJvLWNvcHl7Z3JpZC1yb3c6MTt6LWluZGV4OjE7cGFkZGluZzozMHB4IDIwcHghaW1wb3J0YW50fSNobS1scCAucmVmLWhlcm8tY29weTpiZWZvcmV7ZGlzcGxheTpub25lIWltcG9ydGFudH0jaG0tbHAgLnJlZi1mZWF0dXJlLWFydC5obS1lbmhhbmNlZC1hcnR7YmFja2dyb3VuZC1zaXplOmNvbnRhaW4haW1wb3J0YW50O2JhY2tncm91bmQtcG9zaXRpb246Y2VudGVyIWltcG9ydGFudDtiYWNrZ3JvdW5kLWNvbG9yOiMwNzUxMzchaW1wb3J0YW50O2FzcGVjdC1yYXRpbzoxIWltcG9ydGFudDttaW4taGVpZ2h0OjM2MHB4fSNobS1scCAucmVmLWZlYXR1cmV7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjUyJSA0OCUhaW1wb3J0YW50O21heC1oZWlnaHQ6bm9uZSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtZ3JpZCAuaG0tY2ltZ3tiYWNrZ3JvdW5kOiNmYmY5ZjUhaW1wb3J0YW50fUBtZWRpYShtYXgtd2lkdGg6MTAwMHB4KXsjaG0tbHAgLnJlZi1oZXJvLCNobS1scCAucmVmLWhlcm8tYXJ0LmhtLWVuaGFuY2VkLWFydHttaW4taGVpZ2h0OjQyMHB4IWltcG9ydGFudH19QG1lZGlhKG1heC13aWR0aDo3MDBweCl7I2htLWxwIC5yZWYtaGVyb3ttaW4taGVpZ2h0OjAhaW1wb3J0YW50O2Rpc3BsYXk6ZmxleCFpbXBvcnRhbnR9I2htLWxwIC5yZWYtaGVyby1hcnQuaG0tZW5oYW5jZWQtYXJ0e3dpZHRoOjEwMCUhaW1wb3J0YW50O2hlaWdodDphdXRvIWltcG9ydGFudDttaW4taGVpZ2h0OjAhaW1wb3J0YW50O2FzcGVjdC1yYXRpbzoxIWltcG9ydGFudDtiYWNrZ3JvdW5kLXNpemU6Y292ZXIhaW1wb3J0YW50O21hcmdpbi10b3A6MCFpbXBvcnRhbnR9I2htLWxwIC5yZWYtZmVhdHVyZXtncmlkLXRlbXBsYXRlLWNvbHVtbnM6MWZyIWltcG9ydGFudH0jaG0tbHAgLnJlZi1mZWF0dXJlLWFydC5obS1lbmhhbmNlZC1hcnR7bWluLWhlaWdodDowIWltcG9ydGFudDt3aWR0aDoxMDAlIWltcG9ydGFudDthc3BlY3QtcmF0aW86MSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtaGVyby1jb3B5e3BhZGRpbmc6MjBweCAxOHB4IWltcG9ydGFudH19');
   var refLastStyle=document.createElement('style');refLastStyle.textContent=hmDecodeCss([
