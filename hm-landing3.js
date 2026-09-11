@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.8.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.8.1 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -2171,10 +2171,10 @@ html=refPolished.innerHTML;
       var cartItemId = raw.cart_item_id || raw.item_id || raw.row_id || (rawId && String(rawId) !== String(pid) ? rawId : '');
       var key = cartItemId ? ('c:' + String(cartItemId)) : ('p:' + String(pid || rawId || ''));
 
-      var img = raw.image || raw.image_url || raw.imageUrl || product.image || product.image_url || (product.main_image && (product.main_image.url || product.main_image.src)) || (localProductMeta[String(pid)] && localProductMeta[String(pid)].image) || '';
+      var img = raw.image || raw.image_url || raw.imageUrl || raw.product_image || product.image || product.image_url || (product.main_image && (product.main_image.url || product.main_image.src)) || (localProductMeta[String(pid)] && localProductMeta[String(pid)].image) || '';
       if (img && typeof img === 'object') img = img.url || img.path || '';
 
-      var name = raw.name || raw.title || product.name || product.title || (localProductMeta[String(pid)] && localProductMeta[String(pid)].title) || 'منتج';
+      var name = raw.name || raw.title || raw.product_name || product.name || product.title || (localProductMeta[String(pid)] && localProductMeta[String(pid)].title) || 'منتج';
 
       items.push({ key: key, id: String(pid || ''), productId: String(pid || ''), cartItemId: cartItemId ? String(cartItemId) : '', name: name, image: img, quantity: qty, unitPrice: unitPrice || (qty ? lineTotal / qty : 0), total: lineTotal });
       count += qty;
