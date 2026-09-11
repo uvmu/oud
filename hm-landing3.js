@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.7.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.8.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1424,6 +1424,7 @@
   '<section class="ref-feature"><div class="ref-feature-copy"><h2>الأكثر طلباً</h2><h3>بوكس طعام القطط المعقمة</h3><div class="ref-inclusions">'+[['box','6 أنواع من أجود الماركات'],['star','دعم صحة المسالك البولية'],['check-circle','بدون ألوان أو مواد حافظة'],['gift','مناسب لجميع الأعمار']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.sterilisedBox,'أضيفيه للسلة - 200 ر.س')+'</div><div class="ref-art ref-feature-art" role="img" aria-label="بوكس طعام القطط المعقمة"></div></section>'+
   '<section class="ref-steps"><h2>كيف تعمل بوكسات هامتارو؟</h2><div class="ref-step-grid"><div>'+refIcon('box')+'<p>اختاري البوكس المناسب<br>لعمر واحتياجات قطتك</p></div><div>'+refIcon('shipping')+'<p>نجهز بوكسك بعناية<br>ونوصله لباب بيتك</p></div><div>'+refIcon('heart')+'<p>استمتعي بمنتجات أصلية<br>وسعادة لقطتك</p></div></div></section>'+
   '<section class="ref-reviews"><h2>قالوا عن بوكسات هامتارو</h2><div class="hm-rslider"><div class="hm-rscroll">'+revHTML+'</div><button class="hm-rarrow hm-rprev" aria-label="التقييم السابق">‹</button><button class="hm-rarrow hm-rnext" aria-label="التقييم التالي">›</button></div></section>'+
+  '<section class="ref-feature ref-feature-alt"><div class="ref-feature-copy"><h2>وفّر أكثر</h2><h3>عرض كيت كات لليوم الوطني</h3><div class="ref-inclusions">'+[['box','20 لتر رمل كيت كات'],['star','معطّران بالياسمين'],['check-circle','خالٍ من الغبار بنسبة 99%'],['gift','توفير 33.90 ريال']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.kitkatBundle,'أضيفيه للسلة - 96 ر.س')+'</div><div class="ref-art ref-feature-art ref-feature-art-2" role="img" aria-label="عرض كيت كات لليوم الوطني"></div></section>'+
   '<section class="ref-final"><h2>احتفلي باليوم الوطني مع قطتك</h2><p>إصدار محدود.. وفّري أكثر</p><a class="ref-pill" href="#hm-products">اختاري البوكس المناسب ‹</a></section>'+
   '<footer class="ref-footer"><div><a class="ref-logo" href="'+baseUrl+'">Hamtaro</a><div>كل حب.. يستحق الأفضل ♡</div></div><div><b>عن هامتارو</b><br><a href="#hm-products">البوكسات والمنتجات</a><br><a href="'+hmWaHref()+'">تواصل معنا</a></div><div><b>خدمة العملاء</b><br><a href="'+hmWaHref('أريد تتبع طلبي')+'">تتبع الطلب</a><br><a href="'+cartUrl+'">سلة المشتريات</a></div><div><b>نحن هنا لمساعدتك</b><br><a href="'+hmWaHref()+'">واتساب</a></div></footer></div>'+refOverlay.slice(1).join('')+'</div>';
 
@@ -1647,7 +1648,8 @@
   var HERO_BANNER_IMG='https://cdn.files.salla.network/other/1278867981/c01ea71a-7399-407c-b011-14523e7bef16-original.webp';
   var HERO_BANNER_RATIO='1417 / 602';
   var FEATURE_PRODUCT_IMG='https://cdn.salla.sa/zvoeKA/0684fbc3-9518-4105-9a70-d8b5842745ab-800x1000-Y1GD5g5511xY1h69MP8w5rZOs3A4ZIz5hk60603o.jpg';
-  [['.ref-hero-art',HERO_BANNER_IMG],['.ref-feature-art',FEATURE_PRODUCT_IMG]].forEach(function(pair){var el=refPolished.querySelector(pair[0]);el.classList.add('hm-enhanced-art');el.style.setProperty('background-image','url('+pair[1]+')','important');});
+  var KITKAT_OFFER_IMG='https://cdn.salla.sa/zvoeKA/b3c69a97-c7e8-4e75-bf19-b7af4501c677-800x1000-3KUQmjBhR9qYwFCKpbtl1Cl9NQ3SEq9iKICkIelc.jpg';
+  [['.ref-hero-art',HERO_BANNER_IMG],['.ref-feature-art:not(.ref-feature-art-2)',FEATURE_PRODUCT_IMG],['.ref-feature-art-2',KITKAT_OFFER_IMG]].forEach(function(pair){var el=refPolished.querySelector(pair[0]);if(!el)return;el.classList.add('hm-enhanced-art');el.style.setProperty('background-image','url('+pair[1]+')','important');});
   var heroArtEl=refPolished.querySelector('.ref-hero-art');
   if(heroArtEl){
     heroArtEl.style.setProperty('aspect-ratio',HERO_BANNER_RATIO,'important');
@@ -1673,7 +1675,7 @@
   var countdownFloatEl=refPolished.querySelector('.ref-countdown-float');
   if(countdownFloatEl){
     countdownFloatEl.style.setProperty('position','absolute','important');
-    countdownFloatEl.style.setProperty('bottom','16px','important');
+    countdownFloatEl.style.setProperty('bottom','40px','important');
     countdownFloatEl.style.setProperty('right','16px','important');
     countdownFloatEl.style.setProperty('left','auto','important');
     countdownFloatEl.style.setProperty('background','rgba(255,255,255,.95)','important');
@@ -1701,12 +1703,19 @@
       });
     }
   }
-  var featureArtEl=refPolished.querySelector('.ref-feature-art');
+  var featureArtEl=refPolished.querySelector('.ref-feature-art:not(.ref-feature-art-2)');
   if(featureArtEl){
     featureArtEl.style.setProperty('aspect-ratio','800 / 1000','important');
     featureArtEl.style.setProperty('height','auto','important');
     featureArtEl.style.setProperty('min-height','0','important');
     featureArtEl.style.setProperty('background-size','cover','important');
+  }
+  var featureArtEl2=refPolished.querySelector('.ref-feature-art-2');
+  if(featureArtEl2){
+    featureArtEl2.style.setProperty('aspect-ratio','800 / 1000','important');
+    featureArtEl2.style.setProperty('height','auto','important');
+    featureArtEl2.style.setProperty('min-height','0','important');
+    featureArtEl2.style.setProperty('background-size','cover','important');
   }
   var hmArtworkStyle=document.createElement('style');hmArtworkStyle.textContent=hmDecodeCss('I2htLWxwIC5yZWYtaGVyb3tncmlkLXRlbXBsYXRlLWNvbHVtbnM6NDIlIDU4JSFpbXBvcnRhbnQ7bWluLWhlaWdodDo1NTBweCFpbXBvcnRhbnQ7YXNwZWN0LXJhdGlvOmF1dG8haW1wb3J0YW50O2JhY2tncm91bmQ6I2Y3ZjFlNSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtaGVyby1hcnQuaG0tZW5oYW5jZWQtYXJ0e3Bvc2l0aW9uOnJlbGF0aXZlIWltcG9ydGFudDtpbnNldDphdXRvIWltcG9ydGFudDtncmlkLWNvbHVtbjoyO2dyaWQtcm93OjE7aGVpZ2h0OjEwMCUhaW1wb3J0YW50O21pbi1oZWlnaHQ6NTUwcHg7YXNwZWN0LXJhdGlvOmF1dG8haW1wb3J0YW50O2JhY2tncm91bmQtc2l6ZTpjb250YWluIWltcG9ydGFudDtiYWNrZ3JvdW5kLXBvc2l0aW9uOmNlbnRlciFpbXBvcnRhbnQ7ei1pbmRleDowIWltcG9ydGFudH0jaG0tbHAgLnJlZi1oZXJvLWNvcHl7Z3JpZC1yb3c6MTt6LWluZGV4OjE7cGFkZGluZzozMHB4IDIwcHghaW1wb3J0YW50fSNobS1scCAucmVmLWhlcm8tY29weTpiZWZvcmV7ZGlzcGxheTpub25lIWltcG9ydGFudH0jaG0tbHAgLnJlZi1mZWF0dXJlLWFydC5obS1lbmhhbmNlZC1hcnR7YmFja2dyb3VuZC1zaXplOmNvbnRhaW4haW1wb3J0YW50O2JhY2tncm91bmQtcG9zaXRpb246Y2VudGVyIWltcG9ydGFudDtiYWNrZ3JvdW5kLWNvbG9yOiMwNzUxMzchaW1wb3J0YW50O2FzcGVjdC1yYXRpbzoxIWltcG9ydGFudDttaW4taGVpZ2h0OjM2MHB4fSNobS1scCAucmVmLWZlYXR1cmV7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjUyJSA0OCUhaW1wb3J0YW50O21heC1oZWlnaHQ6bm9uZSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtZ3JpZCAuaG0tY2ltZ3tiYWNrZ3JvdW5kOiNmYmY5ZjUhaW1wb3J0YW50fUBtZWRpYShtYXgtd2lkdGg6MTAwMHB4KXsjaG0tbHAgLnJlZi1oZXJvLCNobS1scCAucmVmLWhlcm8tYXJ0LmhtLWVuaGFuY2VkLWFydHttaW4taGVpZ2h0OjQyMHB4IWltcG9ydGFudH19QG1lZGlhKG1heC13aWR0aDo3MDBweCl7I2htLWxwIC5yZWYtaGVyb3ttaW4taGVpZ2h0OjAhaW1wb3J0YW50O2Rpc3BsYXk6ZmxleCFpbXBvcnRhbnR9I2htLWxwIC5yZWYtaGVyby1hcnQuaG0tZW5oYW5jZWQtYXJ0e3dpZHRoOjEwMCUhaW1wb3J0YW50O2hlaWdodDphdXRvIWltcG9ydGFudDttaW4taGVpZ2h0OjAhaW1wb3J0YW50O2FzcGVjdC1yYXRpbzoxIWltcG9ydGFudDtiYWNrZ3JvdW5kLXNpemU6Y292ZXIhaW1wb3J0YW50O21hcmdpbi10b3A6MCFpbXBvcnRhbnR9I2htLWxwIC5yZWYtZmVhdHVyZXtncmlkLXRlbXBsYXRlLWNvbHVtbnM6MWZyIWltcG9ydGFudH0jaG0tbHAgLnJlZi1mZWF0dXJlLWFydC5obS1lbmhhbmNlZC1hcnR7bWluLWhlaWdodDowIWltcG9ydGFudDt3aWR0aDoxMDAlIWltcG9ydGFudDthc3BlY3QtcmF0aW86MSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtaGVyby1jb3B5e3BhZGRpbmc6MjBweCAxOHB4IWltcG9ydGFudH19');
   var refLastStyle=document.createElement('style');refLastStyle.textContent=hmDecodeCss([
