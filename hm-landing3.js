@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.13.1 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.13.2 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1785,7 +1785,7 @@
       '#hm-lp .ref-nav nav a{padding:13px 4px!important;border-bottom:1px solid rgba(16,88,57,.1)!important;font-size:15px!important}'+
       '#hm-lp .ref-feature h2{font-size:24px!important}'+
       '#hm-lp .ref-feature h3{font-size:19px!important}'+
-      '#hm-lp .ref-benefits{grid-template-columns:1fr!important;gap:0!important;margin:-16px 4% 18px!important;padding:4px 16px!important;border-radius:14px!important;min-height:0!important}'+
+      '#hm-lp .ref-benefits{grid-template-columns:1fr!important;gap:0!important;margin:14px 4% 18px!important;padding:4px 16px!important;border-radius:14px!important;min-height:0!important}'+
       '#hm-lp .ref-benefits>div{flex-direction:row!important;justify-content:flex-start!important;text-align:right!important;gap:12px!important;border-left:0!important;border-bottom:1px solid rgba(16,88,57,.08)!important;padding:10px 0!important}'+
       '#hm-lp .ref-benefits>div:last-child{border-bottom:0!important}'+
       '#hm-lp .ref-benefit-art{width:32px!important;height:32px!important;flex:0 0 32px!important}'+
