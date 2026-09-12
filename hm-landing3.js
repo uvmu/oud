@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.18.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.18.1 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1715,7 +1715,7 @@
       countdownFloatEl.style.setProperty('white-space','nowrap','important');
       countdownFloatEl.style.setProperty('margin','0','important');
       countdownFloatEl.style.setProperty('display','flex','important');
-      countdownFloatEl.style.setProperty('align-items','center','important');
+      countdownFloatEl.style.setProperty('align-items','baseline','important');
       countdownFloatEl.style.setProperty('justify-content','center','important');
       countdownFloatEl.style.setProperty('gap','10px','important');
       countdownFloatEl.style.setProperty('box-sizing','border-box','important');
@@ -1740,6 +1740,7 @@
       floatClockEl.style.setProperty('display','flex','important');
       floatClockEl.style.setProperty('gap',hmIsMobileLayout?'4px':'clamp(3px,1.4vw,10px)','important');
       floatClockEl.style.setProperty('justify-content','center','important');
+      floatClockEl.style.setProperty('align-items','baseline','important');
       if(hmIsMobileLayout)floatClockEl.classList.add('ref-clock-compact');else floatClockEl.classList.remove('ref-clock-compact');
       Array.prototype.forEach.call(floatClockEl.children,function(box){
         box.style.setProperty('display','flex','important');
