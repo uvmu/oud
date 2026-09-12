@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.15.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.16.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1074,28 +1074,37 @@
   var featHTML = featuredProducts.map(function (p) { return card(p); }).join('');
   var sliderHTML = sliderProducts.map(function (p) { return card(p); }).join('');
 
-  function rev(stars, txt, av, name, city) {
+  function rev(stars, txt, av, name, badge) {
     return '<div class="hm-rc">' +
       '<div class="hm-rc-bg"></div>' +
       '<div class="hm-rc-av">' + av + '</div>' +
       '<div class="hm-rc-body">' +
         '<div class="hm-rstar">' + stars + '</div>' +
-        '<div class="hm-rtxt">\u201c' + txt + '\u201d</div>' +
+        '<div class="hm-rtxt">“' + txt + '”</div>' +
         '<div class="hm-raut">' +
           '<div class="hm-rav">' + av + '</div>' +
-          '<div><div class="hm-rnm">' + name + ' <span class="hm-rver">موثق \u2713</span></div>' +
-          '<div class="hm-rct">' + city + '</div></div>' +
+          '<div><div class="hm-rnm">' + name + ' <span class="hm-rver">' + badge + ' ✓</span></div>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</div>';
   }
 
+  // Real, published Salla store reviews (compliance: no fabricated testimonials).
   var REVS = [
-    rev("★★★★★", "دفعت عبر تابي خلال دقيقة، والطلب وصلني بنفس اليوم في الرياض. تجربة نظيفة جدا", "م", "مشاعل القحطاني", "الرياض"),
-    rev("★★★★★", "كنت أشتري كل شيء منفصل. البوكس وفّر علي وقت وتكلفة، وقطتي تقبلته مباشرة", "ع", "علياء الشهري", "جدة"),
-    rev("★★★★★", "جربت بوكس الكيتن وكان مرتب وواضح. ممتاز للمربي الجديد وما يحتاج حيرة", "ه", "هتون العتيبي", "الدمام"),
-    rev("★★★★★", "أكثر شيء عجبني وضوح المحتويات والسعر مقارنة بالشراء الفردي. فعلا فرق ملموس", "ف", "فهد الجهني", "الخبر"),
-    rev("★★★★★", "الدعم عبر واتساب سريع، وتمارا كانت مريحة جدا. صار المتجر خياري الأول", "ن", "نواف الحربي", "الرياض")
+    rev("★★★★★", "متجاوبين واسعار ممتازة وحبيت اسم المتجر احب همتارو", "س", "سهر الهذلي", "موثقة"),
+    rev("★★★★★", "منتجات رائعه يعطيكم العافيه شكراً", "ر", "رنده شباج", "موثقة"),
+    rev("★★★★★", "تنوع المنتجات، بأسعار منافسة ومتابعة الطلب مع العميل وسرعة التوصيل! بكون عميلة دائمة بإذن الله", "م", "منى العتيبي", "موثقة"),
+    rev("★★★★★", "جودة الاغراض ممتازة وقططي حبوها والمتجر جدًا متعاون وسريع في التوصيل", "أ", "Ajwan Alharbi", "موثقة"),
+    rev("★★★★★", "ممتاز ومتنوع", "ر", "رباب الصبحي", "موثقة"),
+    rev("★★★★★", "افضل واعظم متجر مر في حياتي! التوصيل جدًا جدًا سريع، تجربة لن تتكرر وراح اعتمدهم", "ر", "Razan Altamimi", "موثقة"),
+    rev("★★★★★", "ياحلوكم والله توصيل سريع وتنوع منتجات", "ل", "لمى العلي", "موثقة"),
+    rev("★★★★★", "متجر رائع وفيه كل ما يحتاجه مربي القطط واسعاره جدًا مناسبة", "ن", "نوف سامي", "موثقة"),
+    rev("★★★★★", "منتجات أصليه وتعامل ممتاز وسرعة في التوصيل", "م", "Maram علي", "موثقة"),
+    rev("★★★★★", "متجر رائع سريع في الرد والتعامل شكراً همتارووووو", "ن", "نجلاء الشهري", "موثقة"),
+    rev("★★★★★", "اسعار حلوه و توصيل سريع", "ب", "بسام العمري", "موثق"),
+    rev("★★★★★", "توصيل جبار", "ر", "روان الحربي", "موثقة"),
+    rev("★★★★★", "توصيل سريع ومنتجات منوعة", "ح", "حنان سليمان", "موثقة")
   ];
   var revHTML = REVS.join('');
 
@@ -1638,7 +1647,7 @@
   refPolished.querySelector('.ref-step-grid').innerHTML=[['box','اختاري البوكس المناسب','لعمر واحتياجات قطتك'],['truck','نجهز بوكسك بعناية','ونوصله لباب بيتك'],['heart','استمتعي بمنتجات أصلية','وسعادة لقطتك']].map(function(o,i){return '<div class="ref-step"><div class="ref-step-visual"><span class="ref-step-picture ref-step-'+o[0]+'" aria-hidden="true"></span><span class="ref-step-number" aria-label="الخطوة '+(i+1)+'">'+(i+1)+'</span></div>'+(i<2?refArrow:'')+'<p>'+o[1]+'<br>'+o[2]+'</p></div>';}).join('');
   var refReviewTrack=refPolished.querySelector('.hm-rscroll');
   // Retain the supplied customer statements; only their presentation changes.
-  refReviewTrack.innerHTML=REVS.map(function(markup,i){var t=document.createElement('div');t.innerHTML=markup;var text=t.querySelector('.hm-rtxt').textContent.replace(/^[“”]|[“”]$/g,'');var author=t.querySelector('.hm-rnm').firstChild.textContent.trim();var q=document.createElement('article');q.className='hm-rc';var hole=document.createElement('span');hole.className='hm-rc-hole';hole.setAttribute('aria-hidden','true');var quoteMark=document.createElement('span');quoteMark.className='hm-rc-quote';quoteMark.setAttribute('aria-hidden','true');quoteMark.textContent='“';var stars=document.createElement('span');stars.className='ref-review-stars';stars.setAttribute('aria-label','5 من 5');stars.textContent='★★★★★';var paw=document.createElement('div');paw.className='hm-rc-paw';paw.setAttribute('aria-hidden','true');var pawIcon=document.createElement('span');pawIcon.className='hm-rc-paw-icon';pawIcon.textContent='🐾';var pawScore=document.createElement('span');pawScore.className='hm-rc-paw-score';pawScore.textContent='5.0';paw.appendChild(pawIcon);paw.appendChild(pawScore);var copy=document.createElement('blockquote');copy.className='ref-review-copy';copy.textContent=text;var divider=document.createElement('div');divider.className='hm-rc-divider';divider.setAttribute('aria-hidden','true');var foot=document.createElement('div');foot.className='ref-review-author';var avatar=document.createElement('span');avatar.className='ref-review-avatar ref-avatar-'+(i%3);avatar.setAttribute('aria-hidden','true');var name=document.createElement('span');name.className='ref-review-name';name.textContent=author;foot.appendChild(avatar);foot.appendChild(name);q.appendChild(hole);q.appendChild(quoteMark);q.appendChild(stars);q.appendChild(paw);q.appendChild(copy);q.appendChild(divider);q.appendChild(foot);return q.outerHTML;}).join('');
+  refReviewTrack.innerHTML=REVS.map(function(markup,i){var t=document.createElement('div');t.innerHTML=markup;var text=t.querySelector('.hm-rtxt').textContent.replace(/^[“”]|[“”]$/g,'');var author=t.querySelector('.hm-rnm').firstChild.textContent.trim();var badgeTxt=t.querySelector('.hm-rver')?t.querySelector('.hm-rver').textContent.trim():'';var q=document.createElement('article');q.className='hm-rc';var hole=document.createElement('span');hole.className='hm-rc-hole';hole.setAttribute('aria-hidden','true');var quoteMark=document.createElement('span');quoteMark.className='hm-rc-quote';quoteMark.setAttribute('aria-hidden','true');quoteMark.textContent='“';var stars=document.createElement('span');stars.className='ref-review-stars';stars.setAttribute('aria-label','5 من 5');stars.textContent='★★★★★';var paw=document.createElement('div');paw.className='hm-rc-paw';paw.setAttribute('aria-hidden','true');var pawIcon=document.createElement('span');pawIcon.className='hm-rc-paw-icon';pawIcon.textContent='🐾';var pawScore=document.createElement('span');pawScore.className='hm-rc-paw-score';pawScore.textContent='5.0';paw.appendChild(pawIcon);paw.appendChild(pawScore);var copy=document.createElement('blockquote');copy.className='ref-review-copy';copy.textContent=text;var divider=document.createElement('div');divider.className='hm-rc-divider';divider.setAttribute('aria-hidden','true');var foot=document.createElement('div');foot.className='ref-review-author';var avatar=document.createElement('span');avatar.className='ref-review-avatar ref-avatar-'+(i%3);avatar.setAttribute('aria-hidden','true');var name=document.createElement('span');name.className='ref-review-name';name.textContent=author;var badge=document.createElement('span');badge.className='ref-review-badge';badge.textContent=badgeTxt;foot.appendChild(avatar);foot.appendChild(name);foot.appendChild(badge);q.appendChild(hole);q.appendChild(quoteMark);q.appendChild(stars);q.appendChild(paw);q.appendChild(copy);q.appendChild(divider);q.appendChild(foot);return q.outerHTML;}).join('');
   if(window.matchMedia('(max-width:700px)').matches){
     refReviewTrack.querySelectorAll('.hm-rc').forEach(function(card){
       card.style.setProperty('overflow','visible','important');
@@ -1781,7 +1790,7 @@
     '#hm-lp .hm-nav-backdrop{position:fixed;inset:0;background:rgba(15,25,18,.45);z-index:9995;opacity:0;pointer-events:none;transition:opacity .25s ease}'+
     '#hm-lp .hm-nav-backdrop.hm-nav-open{opacity:1;pointer-events:auto}'+
     '#hm-lp .ref-countdown-bar{position:relative!important;width:100%!important;box-sizing:border-box!important;margin:10px 0 0!important;text-align:center!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;gap:8px!important;white-space:nowrap!important}'+
-    '#hm-lp .ref-reviews .hm-rc-hole,#hm-lp .ref-reviews .hm-rc-paw,#hm-lp .ref-reviews .hm-rc-divider{display:none}'+
+    '#hm-lp .ref-reviews .hm-rc-hole,#hm-lp .ref-reviews .hm-rc-paw,#hm-lp .ref-reviews .hm-rc-divider,#hm-lp .ref-review-badge{display:none}'+
     '@media(max-width:700px){'+
       '#hm-lp .ref-nav{justify-content:space-between!important;gap:14px!important;flex-wrap:nowrap!important;position:relative!important;z-index:9997!important}'+
       '#hm-lp .ref-nav-actions{display:contents!important}'+
@@ -1815,7 +1824,7 @@
       '#hm-lp .ref-reviews .hm-rc-paw-score{font-weight:800!important;color:#0f5c3c!important;font-size:14px!important;background:rgba(15,92,60,.1)!important;padding:2px 10px!important;border-radius:999px!important}'+
       '#hm-lp .ref-reviews .hm-rc-divider{display:block!important;height:0!important;border-top:2px dashed #c7b284!important;margin:10px 0!important;opacity:.85!important}'+
       '#hm-lp .ref-review-copy{color:#3a3222!important}'+
-      '#hm-lp .ref-review-name{color:#0f5c3c!important;font-weight:800!important}'+
+      '#hm-lp .ref-review-name{color:#0f5c3c!important;font-weight:800!important}'+'#hm-lp .ref-review-badge{display:inline-block!important;margin-right:6px!important;font-size:10px!important;font-weight:700!important;color:#0f5c3c!important;background:rgba(15,92,60,.1)!important;padding:2px 8px!important;border-radius:999px!important}'+
       '#hm-lp .ref-review-avatar{border-color:#c0912f!important}'+
     '}'+
     '@media(prefers-reduced-motion:reduce){#hm-lp .ref-reviews .hm-rc{animation:none!important}}';
