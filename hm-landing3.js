@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.20.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.21.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1432,15 +1432,15 @@
   '<section class="ref-products" id="hm-products"><div class="ref-product-head"><h2>اختاري البوكس المناسب</h2><div class="ref-filters" role="group" aria-label="نوع القطة">'+[['featured','الكل'],['kitten','القطط الصغيرة'],['adult','القطط البالغة'],['dogs','كلاب']].map(function(f){return '<button type="button" class="ref-filter" data-ref-filter="'+f[0]+'" aria-pressed="'+(f[0]==='featured')+'">'+f[1]+'</button>';}).join('')+'</div></div><div class="ref-grid">'+refCards(refOrder.slice(0,4))+'</div><button type="button" class="ref-more" data-ref-all>عرض جميع البوكسات</button></section>'+
   '<section class="ref-feature" id="hm-feature"><div class="ref-feature-copy"><h2>الأكثر طلباً</h2><h3>بوكس طعام القطط المعقمة</h3><div class="ref-inclusions">'+[['box','6 أنواع من أجود الماركات'],['star','دعم صحة المسالك البولية'],['check-circle','بدون ألوان أو مواد حافظة'],['gift','مناسب لجميع الأعمار']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.sterilisedBox,'أضيفيه للسلة - 200 ر.س')+'</div><div class="ref-art ref-feature-art" role="img" aria-label="بوكس طعام القطط المعقمة"></div></section>'+
   '<section class="ref-steps"><h2>كيف تعمل بوكسات هامتارو؟</h2><div class="ref-step-grid"><div>'+refIcon('box')+'<p>اختاري البوكس المناسب<br>لعمر واحتياجات قطتك</p></div><div>'+refIcon('shipping')+'<p>نجهز بوكسك بعناية<br>ونوصله لباب بيتك</p></div><div>'+refIcon('heart')+'<p>استمتعي بمنتجات أصلية<br>وسعادة لقطتك</p></div></div></section>'+
-  '<section class="ref-reviews" id="hm-reviews"><h2>قالوا عن بوكسات هامتارو</h2><p class="hm-rev-sub">تجارب حقيقية من عملائنا ومحبي قططهم</p>'+
+  '<section class="ref-reviews" id="hm-reviews"><span class="hm-rev-doodle-heart" aria-hidden="true">♡<br>سعادة أكبر<br>لقططكم</span><h2>قالوا عن بوكسات هامتارو<span class="hm-rev-doodle-paw" aria-hidden="true">🐾</span></h2><p class="hm-rev-sub">تجارب حقيقية من عملائنا ومحبي قططهم</p>'+
   '<div class="hm-rev-summary"><img class="hm-rev-summary-cat" src="https://cdn.jsdelivr.net/gh/uvmu/oud@assets-v1.2.0/assets/caticon.png" alt="" aria-hidden="true">'+
-    '<div class="hm-rev-summary-main"><span class="hm-rev-summary-label">تقييم عملائنا</span><span class="hm-rev-summary-stars">★★★★★</span><span class="hm-rev-summary-count">+1,081 تقييم موثق</span></div>'+
-    '<div class="hm-rev-summary-divider"></div>'+
     '<div class="hm-rev-summary-badge"><span class="hm-rev-summary-badge-icon">🛡️</span><span class="hm-rev-summary-badge-text">آراء حقيقية من محبي القطط<br><small>كل تقييم يأتي من عميل فعلي</small></span></div>'+
+    '<div class="hm-rev-summary-divider"></div>'+
+    '<div class="hm-rev-summary-main"><span class="hm-rev-summary-label">تقييم عملائنا</span><strong class="hm-rev-summary-score">4.9</strong><span class="hm-rev-summary-stars">★★★★★</span><span class="hm-rev-summary-count">+1,081 تقييم موثق</span></div>'+
   '</div>'+
   '<div class="hm-rev-filters"><button type="button" class="hm-rev-filter hm-rev-filter-active" data-rev-filter="all">الكل</button><button type="button" class="hm-rev-filter" data-rev-filter="top">الأعلى تقييماً</button><button type="button" class="hm-rev-filter" data-rev-filter="care">للعناية والصحة</button><button type="button" class="hm-rev-filter" data-rev-filter="all-ages">لجميع الأعمار</button></div>'+
   '<div class="hm-rslider"><div class="hm-rscroll">'+revHTML+'</div><button class="hm-rarrow hm-rprev" aria-label="التقييم السابق">‹</button><button class="hm-rarrow hm-rnext" aria-label="التقييم التالي">›</button></div>'+
-  '<div class="hm-rev-dots" aria-hidden="true"></div>'+
+  '<div class="hm-rev-dots-row"><div class="hm-rev-dots" aria-hidden="true"></div><span class="hm-rev-doodle-more" aria-hidden="true">♡ المزيد من قصص السعادة</span></div>'+
   '</section>'+
   '<section class="ref-feature ref-feature-alt"><div class="ref-feature-copy"><h2>وفّر أكثر</h2><h3>عرض كيت كات لليوم الوطني</h3><div class="ref-inclusions">'+[['box','20 لتر رمل كيت كات'],['star','معطّران بالياسمين'],['check-circle','خالٍ من الغبار بنسبة 99%'],['gift','توفير 33.90 ريال']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.kitkatBundle,'أضيفيه للسلة - 96 ر.س')+'</div><div class="ref-art ref-feature-art ref-feature-art-2" role="img" aria-label="عرض كيت كات لليوم الوطني"></div></section>'+
   '<section class="ref-final"><h2>احتفلي باليوم الوطني مع قطتك</h2><p>إصدار محدود.. وفّري أكثر</p><a class="ref-pill" href="#hm-products">اختاري البوكس المناسب ‹</a></section>'+
@@ -1668,12 +1668,16 @@
       who.appendChild(name);who.appendChild(avatar);
       top.appendChild(verified);top.appendChild(who);
       var stars=document.createElement('span');stars.className='ref-review-stars';stars.setAttribute('aria-label','5 من 5');stars.textContent='★★★★★';
+      var copyWrap=document.createElement('div');copyWrap.className='ref-review-copy-wrap';
+      var quoteMark=document.createElement('span');quoteMark.className='ref-review-quote-mark';quoteMark.setAttribute('aria-hidden','true');quoteMark.textContent='“';
       var copy=document.createElement('blockquote');copy.className='ref-review-copy';copy.textContent=text;
+      copyWrap.appendChild(quoteMark);copyWrap.appendChild(copy);
       var photoWrap=document.createElement('div');photoWrap.className='ref-review-photo-wrap';
+      var photoHeart=document.createElement('span');photoHeart.className='ref-review-photo-heart';photoHeart.setAttribute('aria-hidden','true');photoHeart.textContent='♡';
       var photo=document.createElement('img');photo.className='ref-review-photo';photo.loading='lazy';photo.alt='';photo.src='https://cdn.jsdelivr.net/gh/uvmu/oud@assets-v1.2.0/assets/cat.png';
       var caption=document.createElement('span');caption.className='ref-review-caption';caption.innerHTML='<span aria-hidden="true">🐾</span> منتجات مختارة بعناية.. لقطط أسعد';
-      photoWrap.appendChild(photo);photoWrap.appendChild(caption);
-      q.appendChild(top);q.appendChild(stars);q.appendChild(copy);q.appendChild(photoWrap);
+      photoWrap.appendChild(photoHeart);photoWrap.appendChild(photo);photoWrap.appendChild(caption);
+      q.appendChild(top);q.appendChild(stars);q.appendChild(copyWrap);q.appendChild(photoWrap);
     }else{
       var dStars=document.createElement('span');dStars.className='ref-review-stars';dStars.setAttribute('aria-label','5 من 5');dStars.textContent='★★★★★';
       var dCopy=document.createElement('blockquote');dCopy.className='ref-review-copy';dCopy.textContent=text;
@@ -1698,7 +1702,14 @@
       revDotsEl.innerHTML=REVS.map(function(_,di){return '<span class="hm-rev-dot'+(di===0?' hm-rev-dot-active':'')+'" data-rev-dot="'+di+'"></span>';}).join('');
     }
   }
-  var refNational=document.createElement('button');refNational.type='button';refNational.className='ref-national';refNational.setAttribute('data-ref-filter','featured');refNational.innerHTML='<span aria-hidden="true">✦</span> عروض اليوم الوطني';refPolished.querySelector('.ref-product-head').appendChild(refNational);
+  var refNational=document.createElement('button');refNational.type='button';refNational.className='ref-national';refNational.setAttribute('data-ref-filter','featured');refNational.innerHTML='<span aria-hidden="true">✦</span> عروض اليوم الوطني';
+  if(window.matchMedia('(max-width:700px)').matches){
+    var refFiltersEl=refPolished.querySelector('.ref-filters');
+    refNational.classList.add('ref-national-chip');
+    if(refFiltersEl)refFiltersEl.insertBefore(refNational,refFiltersEl.firstChild);else refPolished.querySelector('.ref-product-head').appendChild(refNational);
+  }else{
+    refPolished.querySelector('.ref-product-head').appendChild(refNational);
+  }
 
   var refMark=refPolished.querySelector('.ref-nav .ref-logo');refMark.classList.add('ref-logo-art');refMark.setAttribute('aria-label','Hamtaro — الرئيسية');
   refPolished.querySelectorAll('.ref-benefits > div > i').forEach(function(el,i){var art=document.createElement('span');art.className='ref-benefit-art ref-benefit-'+i;art.setAttribute('aria-hidden','true');el.replaceWith(art);});
@@ -1843,7 +1854,7 @@
     '#hm-lp .hm-nav-backdrop.hm-nav-open{opacity:1;pointer-events:auto}'+
     '#hm-lp .ref-clock-compact>div:not(:last-child)::after{content:":";margin-inline-start:3px;color:#0f5c3c;font-weight:800}'+
     '#hm-lp .ref-countdown-ticket .ref-clock{border-right:1px solid rgba(16,88,57,.18);padding-right:10px;margin-right:2px}'+
-    '#hm-lp .hm-rev-sub,#hm-lp .hm-rev-summary,#hm-lp .hm-rev-filters,#hm-lp .hm-rev-dots{display:none}'+
+    '#hm-lp .hm-rev-sub,#hm-lp .hm-rev-summary,#hm-lp .hm-rev-filters,#hm-lp .hm-rev-dots-row,#hm-lp .hm-rev-doodle-heart,#hm-lp .hm-rev-doodle-paw,#hm-lp .hm-rev-doodle-more{display:none}'+
     '@media(max-width:700px){'+
       '#hm-lp .ref-nav{justify-content:space-between!important;gap:14px!important;flex-wrap:nowrap!important;position:relative!important;z-index:9997!important}'+
       '#hm-lp .ref-nav-actions{display:contents!important}'+
@@ -1856,10 +1867,12 @@
       '#hm-lp .ref-feature h2{font-size:24px!important}'+
       '#hm-lp .ref-feature h3{font-size:19px!important}'+
       '#hm-lp .ref-product-head{flex-wrap:wrap!important;align-items:center!important;margin:6px 0 12px!important;gap:8px!important}'+
-      '#hm-lp .ref-product-head h2{width:auto!important;flex:1 1 auto!important;order:1!important}'+
-      '#hm-lp .ref-national{order:2!important;padding:6px 14px!important;font-size:11px!important;flex:0 0 auto!important}'+
-      '#hm-lp .ref-national span{font-size:15px!important}'+
-      '#hm-lp .ref-product-head .ref-filters{order:3!important;width:100%!important;flex-basis:100%!important;margin-top:2px!important}'+
+      '#hm-lp .ref-product-head h2{width:100%!important;flex:1 1 100%!important;order:1!important;font-size:26px!important;font-weight:800!important}'+
+      '#hm-lp .ref-product-head .ref-filters{order:2!important;width:100%!important;flex-basis:100%!important;margin-top:4px!important;overflow-x:auto!important;flex-wrap:nowrap!important;scrollbar-width:none!important;scroll-snap-type:x proximity!important}'+
+      '#hm-lp .ref-product-head .ref-filters::-webkit-scrollbar{display:none!important}'+
+      '#hm-lp .ref-filter{flex:0 0 auto!important;scroll-snap-align:start!important}'+
+      '#hm-lp .ref-national-chip{order:-1!important;flex:0 0 auto!important;display:inline-flex!important;align-items:center!important;gap:5px!important;padding:8px 14px!important;font-size:12px!important;font-weight:800!important;border-radius:999px!important;background:linear-gradient(135deg,#0f5c3c,#0a3f29)!important;color:#fff!important;white-space:nowrap!important;scroll-snap-align:start!important;box-shadow:0 3px 10px rgba(15,92,60,.25)!important}'+
+      '#hm-lp .ref-national-chip span{color:#e6c25c!important;font-size:14px!important}'+
       '#hm-lp .ref-products{padding:0 5.5%!important}'+
       '#hm-lp .ref-grid .hm-ctit{min-height:44px!important}'+
       '#hm-lp #hm-wa-float{bottom:64px!important;transform:scale(.88)!important;transform-origin:bottom left!important}'+
@@ -1874,9 +1887,10 @@
       '#hm-lp .ref-reviews h2{font-size:22px!important;margin-bottom:2px!important}'+
       '#hm-lp .hm-rev-sub{font-size:12px!important;color:#6b6558!important;text-align:center!important;margin:0 0 14px!important}'+
       '#hm-lp .hm-rev-summary{display:flex!important;align-items:center!important;gap:10px!important;background:linear-gradient(155deg,#0f5c3c,#0a3f29)!important;border-radius:16px!important;padding:16px 14px!important;margin-bottom:12px!important;position:relative!important;overflow:hidden!important}'+
-      '#hm-lp .hm-rev-summary-cat{position:absolute!important;left:-14px!important;bottom:-10px!important;width:92px!important;height:92px!important;opacity:.18!important;pointer-events:none!important}'+
+      '#hm-lp .hm-rev-summary-cat{position:absolute!important;left:-16px!important;bottom:-14px!important;width:118px!important;height:118px!important;opacity:.35!important;filter:sepia(1) saturate(2.4) hue-rotate(-6deg) brightness(1.5)!important;pointer-events:none!important}'+
       '#hm-lp .hm-rev-summary-main{display:flex!important;flex-direction:column!important;align-items:center!important;gap:3px!important;flex:0 0 auto!important;position:relative!important;z-index:1!important;padding:0 8px!important}'+
       '#hm-lp .hm-rev-summary-label{color:#dfeee6!important;font-size:11px!important;font-weight:700!important;white-space:nowrap!important}'+
+      '#hm-lp .hm-rev-summary-score{color:#fff!important;font-size:26px!important;font-weight:900!important;line-height:1!important}'+
       '#hm-lp .hm-rev-summary-stars{color:#e6c25c!important;font-size:15px!important;letter-spacing:1px!important}'+
       '#hm-lp .hm-rev-summary-count{color:#fff!important;font-size:11px!important;font-weight:800!important;white-space:nowrap!important}'+
       '#hm-lp .hm-rev-summary-divider{width:1px!important;align-self:stretch!important;background:rgba(255,255,255,.18)!important;flex:0 0 1px!important}'+
@@ -1902,11 +1916,19 @@
       '#hm-lp .ref-review-avatar{display:flex!important;align-items:center!important;justify-content:center!important;width:26px!important;height:26px!important;border-radius:50%!important;background:#f1ede1!important;color:#a99a72!important;flex-shrink:0!important}'+
       '#hm-lp .ref-review-avatar svg{width:15px!important;height:15px!important}'+
       '#hm-lp .ref-reviews .ref-review-stars{display:block!important;color:#e6c25c!important;font-size:14px!important;letter-spacing:1px!important;text-align:right!important;margin-bottom:8px!important}'+
+      '#hm-lp .ref-review-copy-wrap{position:relative!important;padding-right:16px!important}'+
+      '#hm-lp .ref-review-quote-mark{position:absolute!important;top:-10px!important;right:-6px!important;font-size:36px!important;font-family:Georgia,serif!important;color:#0f5c3c!important;opacity:.18!important;line-height:1!important;pointer-events:none!important}'+
       '#hm-lp .ref-review-copy{color:#3a3a30!important;font-size:12.5px!important;line-height:1.75!important;margin:0 0 14px!important;text-align:right!important;position:relative!important}'+
+      '#hm-lp .ref-review-photo-heart{display:block!important;position:absolute!important;top:-10px!important;right:-4px!important;color:#bd9842!important;font-size:16px!important;z-index:2!important;pointer-events:none!important}'+
       '#hm-lp .ref-review-photo-wrap{position:relative!important;border-radius:14px!important;overflow:hidden!important;background:linear-gradient(155deg,#f3ede0,#e3ecdf)!important}'+
       '#hm-lp .ref-review-photo{display:block!important;width:100%!important;height:140px!important;object-fit:contain!important;object-position:center 85%!important;padding:6px 0 0!important;box-sizing:border-box!important}'+
       '#hm-lp .ref-review-caption{position:absolute!important;left:10px!important;right:10px!important;bottom:8px!important;background:rgba(255,255,255,.94)!important;color:#2c342a!important;font-size:10.5px!important;font-weight:700!important;padding:7px 10px!important;border-radius:10px!important;display:flex!important;align-items:center!important;gap:5px!important;box-shadow:0 2px 8px rgba(0,0,0,.12)!important}'+
-      '#hm-lp .hm-rev-dots{display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;margin-top:12px!important}'+
+      '#hm-lp .hm-rev-dots-row{display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;margin-top:12px!important;flex-wrap:wrap!important}'+
+      '#hm-lp .hm-rev-dots{display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;margin-top:0!important}'+
+      '#hm-lp .hm-rev-doodle-heart{display:block!important;position:absolute!important;top:-6px!important;right:0!important;color:#bd9842!important;font-family:cursive,"Brush Script MT",sans-serif!important;font-size:10px!important;line-height:1.3!important;text-align:center!important;font-weight:700!important;transform:rotate(-6deg)!important;pointer-events:none!important}'+
+      '#hm-lp .ref-reviews h2{position:relative!important;display:inline-block!important}'+
+      '#hm-lp .hm-rev-doodle-paw{display:inline-block!important;margin-right:4px!important;font-size:16px!important;opacity:.7!important;transform:rotate(-12deg)!important;vertical-align:middle!important}'+
+      '#hm-lp .hm-rev-doodle-more{display:block!important;color:#bd9842!important;font-size:10.5px!important;font-weight:700!important;font-family:cursive,"Brush Script MT",sans-serif!important}'+
       '#hm-lp .hm-rev-dots span{width:6px!important;height:6px!important;border-radius:50%!important;background:rgba(16,88,57,.2)!important;transition:background .2s ease,width .2s ease!important}'+
       '#hm-lp .hm-rev-dots span.hm-rev-dot-active{background:#0f5c3c!important;width:16px!important;border-radius:4px!important}'+
     '}'+
