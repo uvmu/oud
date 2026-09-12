@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.14.2 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.15.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1417,7 +1417,7 @@
     'cG9ydGFudH0jaG0tbHAgLnJlZi1oZXJvLWNvcHl7cGFkZGluZzoyNnB4IDIwcHggNXB4fSNobS1scCAucmVmLWhlcm8tYXJ0e3dpZHRoOjEwMCU7YXNwZWN0LXJhdGlvOjQzMC8zMzB9I2htLWxwIC5yZWYtY291bnRkb3due21hcmdpbi10b3A6MThweH0jaG0tbHAgLnJlZi1iZW5lZml0c3ttYXJnaW46LTEwcHggNCUgMjBweDtwYWRkaW5nOjE2cHggNHB4fSNobS1scCAucmVmLWJlbmVmaXRzPmRpdntmbGV4LWRpcmVjdGlvbjpjb2x1bW47Z2FwOjhweDt0ZXh0LWFsaWduOmNlbnRlcn0jaG0tbHAgLnJlZi1iZW5lZml0cyBie2ZvbnQtc2l6ZToxMnB4fSNobS1scCAucmVmLWJlbmVmaXRzIHNtYWxse2ZvbnQtc2l6ZToxMXB4O2xpbmUtaGVpZ2h0OjEuNn0jaG0tbHAgLnJlZi1wcm9kdWN0LWhlYWR7ZmxleC13cmFwOndyYXB9I2htLWxwIC5yZWYtZmlsdGVyc3tnYXA6NnB4fSNobS1scCAucmVmLWZpbHRlcntmb250LXNpemU6MTJweDtwYWRkaW5nOjhweCAxMnB4fSNobS1scCAucmVmLWdyaWR7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOnJlcGVhdCgyLG1pbm1heCgwLDFmcikpO2dhcDoxMnB4fSNobS1scCAucmVmLWdyaWQgLmhtLWN0aXR7Zm9udC1zaXplOjE1cHghaW1wb3J0YW50fSNobS1scCAucmVmLWdyaWQgLmhtLWNib2R5e3BhZGRpbmc6MCAxMHB4IDE0cHghaW1wb3J0YW50fSNobS1scCAucmVmLWZlYXR1cmV7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjFmcjttYXJnaW46MjBweCAzJX0jaG0tbHAgLnJlZi1mZWF0dXJlLWNvcHl7cGFkZGluZzoyNHB4IDE2cHh9I2htLWxwIC5yZWYtZmVhdHVyZS1hcnR7d2lkdGg6MTAwJTthc3BlY3QtcmF0aW86MzUwLzIxNX0jaG0tbHAgLnJlZi1mZWF0dXJlIGgye2ZvbnQtc2l6ZTozNHB4fSNobS1scCAucmVmLWluY2x1c2lvbnN7Zm9udC1zaXplOjEycHh9I2htLWxwIC5yZWYtc3RlcHN7cGFkZGluZzowIDUlIDIwcHh9I2htLWxwIC5yZWYtc3RlcC1ncmlke2dhcDoxNHB4fSNobS1scCAucmVmLXN0ZXAtZ3JpZCBwe2ZvbnQtc2l6ZToxMnB4fSNobS1scCAucmVmLXN0ZXAtZ3JpZCBpe3dpZHRoOjYycHg7aGVpZ2h0OjYycHg7Zm9udC1zaXplOjMwcHh9I2htLWxwIC5yZWYtcmV2aWV3cyAuaG0tcmN7bWluLXdpZHRoOjg1JSFpbXBvcnRhbnQ7ZmxleC1iYXNpczo4NSUhaW1wb3J0YW50fSNobS1scCAucmVmLWZpbmFsIGgye2ZvbnQtc2l6ZToyM3B4fSNobS1scCAucmVmLWZvb3RlcntmbGV4LXdyYXA6d3JhcDtqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2Vlbn0jaG0tbHAgLnJlZi1jbG9jayBie2ZvbnQtc2l6ZToyMXB4fX0KQG1lZGlhKHByZWZlcnMtcmVkdWNlZC1tb3Rpb246cmVkdWNlKXsjaG0tbHAgKnthbmltYXRpb246bm9uZSFpbXBvcnRhbnQ7dHJhbnNpdGlvbjpub25lIWltcG9ydGFudDtzY3JvbGwtYmVoYXZpb3I6YXV0byFpbXBvcnRhbnR9fQo='
   ].join(''))+'</style><div id="hm-lp" class="hm-lp"><div class="ref-page" style="--ref-art:url('+refArt+')">'+
   '<div class="ref-announcement">التوصيل لجميع مناطق المملكة &nbsp; '+refIcon('shipping')+' &nbsp; عروض اليوم الوطني لفترة محدودة</div>'+
-  '<header class="ref-nav"><a class="ref-logo" href="'+baseUrl+'">Hamtāro</a><nav aria-label="التنقل الرئيسي" id="hm-ref-nav"><a href="'+baseUrl+'">الرئيسية</a><a href="#hm-products" data-ref-all>البوكسات</a><a href="#hm-feature">الأكثر طلباً</a><a href="#hm-reviews">التقييمات</a><a href="'+baseUrl+'/ar/category/YWYAaD">عروض اليوم الوطني</a><a href="'+hmWaHref('أريد تتبع طلبي')+'">تتبع الطلب</a></nav><div class="ref-nav-actions"><button type="button" class="hm-nav-toggle" id="hm-nav-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="hm-ref-nav"><span class="hm-nav-bar"></span><span class="hm-nav-bar"></span><span class="hm-nav-bar"></span></button>'+refOverlay[0]+'</div></header><div class="hm-nav-backdrop" id="hm-nav-backdrop" hidden></div>'+
+  '<header class="ref-nav"><a class="ref-logo" href="'+baseUrl+'">Hamtāro</a><nav aria-label="التنقل الرئيسي" id="hm-ref-nav"><a href="'+baseUrl+'">الرئيسية</a><a href="#hm-products" data-ref-all>البوكسات</a><a href="#hm-feature">الأكثر طلباً</a><a href="#hm-reviews">التقييمات</a></nav><div class="ref-nav-actions"><button type="button" class="hm-nav-toggle" id="hm-nav-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="hm-ref-nav"><span class="hm-nav-bar"></span><span class="hm-nav-bar"></span><span class="hm-nav-bar"></span></button>'+refOverlay[0]+'</div></header><div class="hm-nav-backdrop" id="hm-nav-backdrop" hidden></div>'+
   '<section class="hm-hero ref-hero ref-hero-imgonly"><a class="ref-hero-link" href="#hm-products" aria-label="تسوق عروض اليوم الوطني"><div class="ref-art ref-hero-art" role="img" aria-label="بوكسات اليوم الوطني - عروض حصرية بمناسبة اليوم الوطني"></div><div class="ref-countdown ref-countdown-float">العرض ينتهي خلال<div class="ref-clock"><div><b id="ref-days">00</b><small>أيام</small></div><div><b id="ref-hours">00</b><small>ساعات</small></div><div><b id="ref-minutes">00</b><small>دقيقة</small></div><div><b id="ref-seconds">00</b><small>ثانية</small></div></div></div></a></section>'+
   '<div class="ref-benefits"><div>'+refIcon('shield-check')+'<span><b>منتجات أصلية</b><small>جودة مضمونة لراحة بالك</small></span></div><div>'+refIcon('discount')+'<span><b>توفير أكبر</b><small>أسعار أفضل في البوكسات</small></span></div><div>'+refIcon('shipping')+'<span><b>التوصيل لجميع مناطق المملكة</b><small>سريع وآمن إلى باب بيتك</small></span></div></div>'+
   '<section class="ref-products" id="hm-products"><div class="ref-product-head"><h2>اختاري البوكس المناسب</h2><div class="ref-filters" role="group" aria-label="نوع القطة">'+[['featured','الكل'],['kitten','القطط الصغيرة'],['adult','القطط البالغة'],['dogs','كلاب']].map(function(f){return '<button type="button" class="ref-filter" data-ref-filter="'+f[0]+'" aria-pressed="'+(f[0]==='featured')+'">'+f[1]+'</button>';}).join('')+'</div></div><div class="ref-grid">'+refCards(refOrder.slice(0,4))+'</div><button type="button" class="ref-more" data-ref-all>عرض جميع البوكسات</button></section>'+
@@ -1693,15 +1693,15 @@
       countdownFloatEl.style.setProperty('background','#fff','important');
       countdownFloatEl.style.setProperty('border','1px solid rgba(16,88,57,.15)','important');
       countdownFloatEl.style.setProperty('border-radius','12px','important');
-      countdownFloatEl.style.setProperty('padding','10px 14px','important');
+      countdownFloatEl.style.setProperty('padding','7px 12px','important');
       countdownFloatEl.style.setProperty('box-shadow','0 4px 16px rgba(0,0,0,.08)','important');
       countdownFloatEl.style.setProperty('z-index','2','important');
       countdownFloatEl.style.setProperty('width','100%','important');
       countdownFloatEl.style.setProperty('max-width','100%','important');
-      countdownFloatEl.style.setProperty('font-size','13px','important');
+      countdownFloatEl.style.setProperty('font-size','12px','important');
       countdownFloatEl.style.setProperty('text-align','center','important');
       countdownFloatEl.style.setProperty('white-space','nowrap','important');
-      countdownFloatEl.style.setProperty('margin','12px 0 0','important');
+      countdownFloatEl.style.setProperty('margin','8px 0 0','important');
       countdownFloatEl.style.setProperty('box-sizing','border-box','important');
       heroSectionEl.appendChild(countdownFloatEl);
     }else{
@@ -1722,7 +1722,7 @@
     var floatClockEl=countdownFloatEl.querySelector('.ref-clock');
     if(floatClockEl){
       floatClockEl.style.setProperty('display','flex','important');
-      floatClockEl.style.setProperty('gap',hmIsMobileLayout?'8px':'clamp(3px,1.4vw,10px)','important');
+      floatClockEl.style.setProperty('gap',hmIsMobileLayout?'6px':'clamp(3px,1.4vw,10px)','important');
       floatClockEl.style.setProperty('justify-content','center','important');
       Array.prototype.forEach.call(floatClockEl.children,function(box){
         box.style.setProperty('display','flex','important');
@@ -1730,8 +1730,8 @@
         box.style.setProperty('align-items','center','important');
         box.style.setProperty('gap','2px','important');
         var b=box.querySelector('b'),small=box.querySelector('small');
-        if(b){b.style.setProperty('font-size',hmIsMobileLayout?'16px':'clamp(11px,3.2vw,17px)','important');b.style.setProperty('line-height','1','important');}
-        if(small){small.style.setProperty('font-size',hmIsMobileLayout?'10px':'clamp(6px,1.9vw,10px)','important');small.style.setProperty('white-space','nowrap','important');}
+        if(b){b.style.setProperty('font-size',hmIsMobileLayout?'14px':'clamp(11px,3.2vw,17px)','important');b.style.setProperty('line-height','1','important');}
+        if(small){small.style.setProperty('font-size',hmIsMobileLayout?'9px':'clamp(6px,1.9vw,10px)','important');small.style.setProperty('white-space','nowrap','important');}
       });
     }
   }
@@ -1780,7 +1780,7 @@
     '#hm-lp .hm-nav-toggle.hm-nav-open .hm-nav-bar:nth-child(3){top:20px;transform:rotate(-45deg)}'+
     '#hm-lp .hm-nav-backdrop{position:fixed;inset:0;background:rgba(15,25,18,.45);z-index:9995;opacity:0;pointer-events:none;transition:opacity .25s ease}'+
     '#hm-lp .hm-nav-backdrop.hm-nav-open{opacity:1;pointer-events:auto}'+
-    '#hm-lp .ref-countdown-bar{position:relative!important;width:100%!important;box-sizing:border-box!important;margin:12px 0 0!important;text-align:center!important}'+
+    '#hm-lp .ref-countdown-bar{position:relative!important;width:100%!important;box-sizing:border-box!important;margin:10px 0 0!important;text-align:center!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;gap:8px!important;white-space:nowrap!important}'+
     '#hm-lp .ref-reviews .hm-rc-hole,#hm-lp .ref-reviews .hm-rc-paw,#hm-lp .ref-reviews .hm-rc-divider{display:none}'+
     '@media(max-width:700px){'+
       '#hm-lp .ref-nav{justify-content:space-between!important;gap:14px!important;flex-wrap:nowrap!important;position:relative!important;z-index:9997!important}'+
@@ -1793,13 +1793,13 @@
       '#hm-lp .ref-nav nav a{padding:13px 4px!important;border-bottom:1px solid rgba(16,88,57,.1)!important;font-size:15px!important}'+
       '#hm-lp .ref-feature h2{font-size:24px!important}'+
       '#hm-lp .ref-feature h3{font-size:19px!important}'+
-      '#hm-lp .ref-benefits{grid-template-columns:1fr!important;gap:0!important;margin:14px 4% 18px!important;padding:4px 16px!important;border-radius:14px!important;min-height:0!important}'+
-      '#hm-lp .ref-benefits>div{flex-direction:row!important;justify-content:flex-start!important;text-align:right!important;gap:12px!important;border-left:0!important;border-bottom:1px solid rgba(16,88,57,.08)!important;padding:10px 0!important}'+
+      '#hm-lp .ref-benefits{grid-template-columns:1fr!important;gap:0!important;margin:8px 4% 12px!important;padding:2px 14px!important;border-radius:12px!important;min-height:0!important}'+
+      '#hm-lp .ref-benefits>div{flex-direction:row!important;justify-content:flex-start!important;text-align:right!important;gap:10px!important;border-left:0!important;border-bottom:1px solid rgba(16,88,57,.08)!important;padding:6px 0!important}'+
       '#hm-lp .ref-benefits>div:last-child{border-bottom:0!important}'+
-      '#hm-lp .ref-benefit-art{width:32px!important;height:32px!important;flex:0 0 32px!important}'+
+      '#hm-lp .ref-benefit-art{width:22px!important;height:22px!important;flex:0 0 22px!important}'+
       '#hm-lp .ref-benefits span{display:flex!important;flex-direction:column!important}'+
-      '#hm-lp .ref-benefits b{font-size:13px!important;line-height:1.3!important}'+
-      '#hm-lp .ref-benefits small{font-size:11px!important;margin-top:1px!important;line-height:1.3!important}'+
+      '#hm-lp .ref-benefits b{font-size:12px!important;line-height:1.2!important}'+
+      '#hm-lp .ref-benefits small{font-size:10px!important;margin-top:0!important;line-height:1.2!important}'+
       '#hm-lp .ref-reviews .hm-rc{background:linear-gradient(160deg,#f9f0d9,#ecdbac)!important;border:1px solid #d9c493!important;border-radius:9px!important;box-shadow:0 12px 22px rgba(47,42,31,.16),inset 0 0 0 1px rgba(255,255,255,.4)!important;position:relative!important;overflow:visible!important;padding-top:32px!important;transform:rotate(-1.2deg)!important;transition:opacity .55s ease,transform .55s ease!important}'+
       '#hm-lp .ref-reviews .hm-rc:nth-child(2n){transform:rotate(1.3deg)!important}'+
       '#hm-lp .ref-reviews .hm-rc:nth-child(3n){transform:rotate(-0.6deg)!important}'+
