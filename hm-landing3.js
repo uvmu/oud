@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.22.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.23.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -998,7 +998,7 @@
   var PRODUCTS = [
     { id: HM.mostRequested, feat: true,
       img: 'e53a3bb5-65bf-4526-be89-361e52e8a92f-400x500-lzUyqUXF6OPq6uqK3Ip1igHLC4jasNFrh9iDC0bB.png',
-      badge: "الأكثر طلباً", tags: ["بالغة", "اليوم الوطني"],
+      badge: "يكفي شهر كامل", bg: true, tags: ["بالغة", "اليوم الوطني"],
       title: "بوكس ماكس مقاضي الشهر للقطط البالغة",
       desc: "بوكس ماكس بمناسبة اليوم الوطني — مقاضي الشهر الكاملة لقطتك البالغة في باقة واحدة بسعر العرض.",
       op: null, np: '249', sv: null,
@@ -1007,7 +1007,7 @@
 
     { id: HM.maxMonthlyKitten,
       img: 'cfc707f2-e4f4-4a97-b313-24f717fb237d-400x500-JlgnBtqdJdsp3HuZbd4vzLpLK3jWaDZVqubRYTKM.png',
-      badge: "اليوم الوطني", tags: ["صغيرة", "اليوم الوطني"],
+      badge: "يكفي شهر كامل", bg: true, tags: ["صغيرة", "اليوم الوطني"],
       title: "بوكس ماكس مقاضي الشهر للقطط الصغيرة",
       desc: "بوكس ماكس بمناسبة اليوم الوطني — مقاضي الشهر الكاملة للقطط الصغيرة في باقة واحدة بسعر العرض.",
       op: null, np: '249', sv: null,
@@ -1016,7 +1016,7 @@
 
     { id: HM.plusAdult,
       img: '2e7ac3b8-b0e3-4646-8590-6f67e0f41d77-400x500-AurOudwSGfK18y5NtgKGPAgbkbmAYBOJfiiWJTko.png',
-      tags: ["بالغة", "اليوم الوطني"],
+      badge: "أفضل صفقة", tags: ["بالغة", "اليوم الوطني"],
       title: "بوكس بلس يكفي ويزيد للقطط البالغه",
       desc: "بوكس بلس بمناسبة اليوم الوطني — يكفي ويزيد، باقة موسّعة لاحتياجات قطتك البالغة.",
       op: null, np: '149.01', sv: null,
@@ -1025,7 +1025,7 @@
 
     { id: HM.plusKitten,
       img: 'dbd8115a-75e8-4613-bad0-55508a828736-400x500-XVXjYtrpSaaRoKofrJupIIAqAnpeparkD9SUhYMh.png',
-      tags: ["صغيرة", "اليوم الوطني"],
+      badge: "أفضل سعر", tags: ["صغيرة", "اليوم الوطني"],
       title: "بوكس بلس يكفي ويزيد للقطط الصغيرة",
       desc: "بوكس بلس بمناسبة اليوم الوطني — يكفي ويزيد، باقة موسّعة لاحتياجات القطط الصغيرة.",
       op: null, np: '149.01', sv: null,
@@ -1043,7 +1043,7 @@
 
     { id: HM.fazzaKitten,
       img: 'a08ee19d-aae9-40f5-b952-b41a91427898-400x500-ua3qM6NXk9ZNDpHLu3CE1IvjZmR1Nt7rk7ECDDuA.png',
-      badge: "اقتصادي", bg: true, tags: ["صغيرة", "اقتصادي"],
+      badge: "سعر أقل لفترة محدودة", tags: ["صغيرة", "اقتصادي"],
       title: "بوكس فزعه ميني للقطط الصغيرة",
       desc: "بوكس فزعة ميني اقتصادي بمناسبة اليوم الوطني لتغطية احتياج سريع للقطط الصغيرة.",
       op: null, np: '96', sv: null,
@@ -1052,7 +1052,7 @@
 
     { id: HM.kitkatBundle,
       img: 'b8ce37c1-c092-48f4-9b7b-4e10530db0a3-400x500-3KUQmjBhR9qYwFCKpbtl1Cl9NQ3SEq9iKICkIelc.jpg',
-      badge: "اليوم الوطني", tags: ["اليوم الوطني", "توفير شامل"],
+      badge: "الكمية محدودة لكل عميل", tags: ["اليوم الوطني", "توفير شامل"],
       title: "عرض كيت كات لليوم الوطني",
       desc: "عرض كيت كات الخاص بمناسبة اليوم الوطني ضمن بوكسات التوفير الشاملة.",
       op: null, np: '96', sv: null,
@@ -1061,7 +1061,7 @@
 
     { id: HM.dogsEcon,
       img: '3bd699e5-16aa-4cb1-a775-488cf5c086fe-400x500-cP04veyPWFb5Ubfb9CPSn9iDu91FYRmTsefkgbSv.jpg',
-      badge: "اقتصادي", bg: true, tags: ["كلاب", "اقتصادي"],
+      badge: "لفترة محدودة", tags: ["كلاب", "اقتصادي"],
       title: "بوكس اليوم الوطني الاقتصادي للكلاب",
       desc: "بوكس اقتصادي بمناسبة اليوم الوطني مخصص للكلاب.",
       op: null, np: '96', sv: null,
@@ -1430,7 +1430,7 @@
   '<section class="hm-hero ref-hero ref-hero-imgonly"><a class="ref-hero-link" href="#hm-products" aria-label="تسوق عروض اليوم الوطني"><div class="ref-art ref-hero-art" role="img" aria-label="بوكسات اليوم الوطني - عروض حصرية بمناسبة اليوم الوطني"></div><div class="ref-countdown ref-countdown-float">العرض ينتهي خلال<div class="ref-clock"><div><b id="ref-days">00</b><small>أيام</small></div><div><b id="ref-hours">00</b><small>ساعات</small></div><div><b id="ref-minutes">00</b><small>دقيقة</small></div><div><b id="ref-seconds">00</b><small>ثانية</small></div></div></div></a></section>'+
   '<div class="ref-benefits"><div>'+refIcon('shield-check')+'<span><b>منتجات أصلية</b><small>جودة مضمونة لراحة بالك</small></span></div><div>'+refIcon('discount')+'<span><b>توفير أكبر</b><small>أسعار أفضل في البوكسات</small></span></div><div>'+refIcon('shipping')+'<span><b>التوصيل لجميع مناطق المملكة</b><small>سريع وآمن إلى باب بيتك</small></span></div></div>'+
   '<section class="ref-products" id="hm-products"><div class="ref-product-head"><h2>اختاري البوكس المناسب</h2><div class="ref-filters" role="group" aria-label="نوع القطة">'+[['featured','الكل'],['kitten','القطط الصغيرة'],['adult','القطط البالغة'],['dogs','كلاب']].map(function(f){return '<button type="button" class="ref-filter" data-ref-filter="'+f[0]+'" aria-pressed="'+(f[0]==='featured')+'">'+f[1]+'</button>';}).join('')+'</div></div><div class="ref-grid">'+refCards(refOrder.slice(0,4))+'</div><button type="button" class="ref-more" data-ref-all>عرض جميع البوكسات</button></section>'+
-  '<section class="ref-feature" id="hm-feature"><div class="ref-feature-copy"><h2>الأكثر طلباً</h2><h3>بوكس طعام القطط المعقمة</h3><div class="ref-inclusions">'+[['box','6 أنواع من أجود الماركات'],['star','دعم صحة المسالك البولية'],['check-circle','بدون ألوان أو مواد حافظة'],['gift','مناسب لجميع الأعمار']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.sterilisedBox,'أضيفيه للسلة - 200 ر.س')+'</div><div class="ref-art ref-feature-art" role="img" aria-label="بوكس طعام القطط المعقمة"></div></section>'+
+  '<section class="ref-feature" id="hm-feature"><div class="ref-feature-copy"><span class="ref-feature-badge">🔥 الأكثر طلباً</span><h3>بوكس طعام القطط المعقمة</h3><div class="ref-inclusions">'+[['box','6 أنواع من أجود الماركات'],['star','دعم صحة المسالك البولية'],['check-circle','بدون ألوان أو مواد حافظة'],['gift','مناسب لجميع الأعمار']].map(function(x){return '<span>'+refIcon(x[0])+x[1]+'</span>';}).join('')+'</div>'+sBtn(HM.sterilisedBox,'أضيفيه للسلة - 200 ر.س')+'</div><div class="ref-art ref-feature-art" role="img" aria-label="بوكس طعام القطط المعقمة"></div></section>'+
   '<section class="ref-steps"><h2>كيف تعمل بوكسات هامتارو؟</h2><div class="ref-step-grid"><div>'+refIcon('box')+'<p>اختاري البوكس المناسب<br>لعمر واحتياجات قطتك</p></div><div>'+refIcon('shipping')+'<p>نجهز بوكسك بعناية<br>ونوصله لباب بيتك</p></div><div>'+refIcon('heart')+'<p>استمتعي بمنتجات أصلية<br>وسعادة لقطتك</p></div></div></section>'+
   '<section class="ref-reviews" id="hm-reviews"><span class="hm-rev-doodle-heart" aria-hidden="true">♡<br>سعادة أكبر<br>لقططكم</span><h2>قالوا عن بوكسات هامتارو<span class="hm-rev-doodle-paw" aria-hidden="true">🐾</span></h2><p class="hm-rev-sub">تجارب حقيقية من عملائنا ومحبي قططهم</p>'+
   '<div class="hm-rev-summary"><img class="hm-rev-summary-cat" src="https://cdn.jsdelivr.net/gh/uvmu/oud@assets-v1.2.0/assets/caticon.png" alt="" aria-hidden="true">'+
@@ -1838,6 +1838,7 @@
     '#hm-lp .hm-nav-backdrop.hm-nav-open{opacity:1;pointer-events:auto}'+
     '#hm-lp .ref-clock-compact>div:not(:last-child)::after{content:":";margin-inline-start:3px;color:#0f5c3c;font-weight:800}'+
     '#hm-lp .ref-countdown-ticket .ref-clock{border-right:1px solid rgba(16,88,57,.18);padding-right:10px;margin-right:2px}'+
+    '#hm-lp .ref-feature-badge{display:inline-flex!important;align-items:center!important;gap:6px!important;background:linear-gradient(135deg,#ff5a36,#e0392a)!important;color:#fff!important;font-size:14px!important;font-weight:800!important;padding:8px 18px!important;border-radius:999px!important;margin:0 0 14px!important;box-shadow:0 6px 16px rgba(224,57,42,.35)!important}'+
     '#hm-lp .hm-rev-sub,#hm-lp .hm-rev-summary,#hm-lp .hm-rev-filters,#hm-lp .hm-rev-dots-row,#hm-lp .hm-rev-doodle-heart,#hm-lp .hm-rev-doodle-paw,#hm-lp .hm-rev-doodle-more{display:none}'+
     '@media(max-width:700px){'+
       '#hm-lp .ref-nav{justify-content:space-between!important;gap:14px!important;flex-wrap:nowrap!important;position:relative!important;z-index:9997!important}'+
