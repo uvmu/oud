@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.21.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.22.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1656,10 +1656,9 @@
   refPolished.querySelector('.ref-step-grid').innerHTML=[['box','اختاري البوكس المناسب','لعمر واحتياجات قطتك'],['truck','نجهز بوكسك بعناية','ونوصله لباب بيتك'],['heart','استمتعي بمنتجات أصلية','وسعادة لقطتك']].map(function(o,i){return '<div class="ref-step"><div class="ref-step-visual"><span class="ref-step-picture ref-step-'+o[0]+'" aria-hidden="true"></span><span class="ref-step-number" aria-label="الخطوة '+(i+1)+'">'+(i+1)+'</span></div>'+(i<2?refArrow:'')+'<p>'+o[1]+'<br>'+o[2]+'</p></div>';}).join('');
   var refReviewTrack=refPolished.querySelector('.hm-rscroll');
   // Retain the supplied customer statements; only their presentation changes.
-  var hmReviewsMobile=window.matchMedia('(max-width:700px)').matches;
   refReviewTrack.innerHTML=REVS.map(function(markup,i){var t=document.createElement('div');t.innerHTML=markup;var text=t.querySelector('.hm-rtxt').textContent.replace(/^[“”]|[“”]$/g,'');var author=t.querySelector('.hm-rnm').firstChild.textContent.trim();var badgeTxt=t.querySelector('.hm-rver')?t.querySelector('.hm-rver').textContent.trim():'موثق';
     var q=document.createElement('article');q.className='hm-rc';
-    if(hmReviewsMobile){
+    {
       var top=document.createElement('div');top.className='ref-review-top';
       var verified=document.createElement('span');verified.className='ref-review-verified';verified.innerHTML='<span aria-hidden="true">✓</span> شراء '+badgeTxt;
       var who=document.createElement('div');who.className='ref-review-who';
@@ -1674,33 +1673,18 @@
       copyWrap.appendChild(quoteMark);copyWrap.appendChild(copy);
       var photoWrap=document.createElement('div');photoWrap.className='ref-review-photo-wrap';
       var photoHeart=document.createElement('span');photoHeart.className='ref-review-photo-heart';photoHeart.setAttribute('aria-hidden','true');photoHeart.textContent='♡';
-      var photo=document.createElement('img');photo.className='ref-review-photo';photo.loading='lazy';photo.alt='';photo.src='https://cdn.jsdelivr.net/gh/uvmu/oud@assets-v1.2.0/assets/cat.png';
+      var photo=document.createElement('img');photo.className='ref-review-photo';photo.loading='lazy';photo.alt='';photo.src='https://cdn.jsdelivr.net/gh/uvmu/oud@hm-landing3-v1.22.0/assets/review-kitten.png';
       var caption=document.createElement('span');caption.className='ref-review-caption';caption.innerHTML='<span aria-hidden="true">🐾</span> منتجات مختارة بعناية.. لقطط أسعد';
       photoWrap.appendChild(photoHeart);photoWrap.appendChild(photo);photoWrap.appendChild(caption);
       q.appendChild(top);q.appendChild(stars);q.appendChild(copyWrap);q.appendChild(photoWrap);
-    }else{
-      var dStars=document.createElement('span');dStars.className='ref-review-stars';dStars.setAttribute('aria-label','5 من 5');dStars.textContent='★★★★★';
-      var dCopy=document.createElement('blockquote');dCopy.className='ref-review-copy';dCopy.textContent=text;
-      var dFoot=document.createElement('div');dFoot.className='ref-review-author';
-      var dAvatar=document.createElement('span');dAvatar.className='ref-review-avatar ref-avatar-'+(i%3);dAvatar.setAttribute('aria-hidden','true');
-      var dName=document.createElement('span');dName.className='ref-review-name';dName.textContent=author;
-      dFoot.appendChild(dAvatar);dFoot.appendChild(dName);
-      q.appendChild(dStars);q.appendChild(dCopy);q.appendChild(dFoot);
     }
     return q.outerHTML;}).join('');
   refPolished.querySelectorAll('.ref-review-avatar').forEach(function(el){
     if(!el.querySelector('svg'))el.innerHTML="<svg viewBox=\"0 0 64 64\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path fill=\"#dec79f\" d=\"M12 27 9 8l18 12h10L55 8l-3 19c9 28-49 28-40 0Z\"/><path d=\"m19 33 4 1m18-1-4 1M29 41h6l-3 4zM9 37l14 3m-13 7 13-3m32-7-14 3m13 7-13-3\"/></svg>";
   });
-  if(hmReviewsMobile){
-    refReviewTrack.querySelectorAll('.hm-rc').forEach(function(card){
-      card.style.setProperty('overflow','visible','important');
-      card.style.setProperty('height','auto','important');
-      card.style.setProperty('min-height','0','important');
-    });
-    var revDotsEl=refPolished.querySelector('.hm-rev-dots');
-    if(revDotsEl){
-      revDotsEl.innerHTML=REVS.map(function(_,di){return '<span class="hm-rev-dot'+(di===0?' hm-rev-dot-active':'')+'" data-rev-dot="'+di+'"></span>';}).join('');
-    }
+  var revDotsEl=refPolished.querySelector('.hm-rev-dots');
+  if(revDotsEl){
+    revDotsEl.innerHTML=[0,Math.floor((REVS.length-1)/2),REVS.length-1].map(function(di,i){return '<span class="hm-rev-dot'+(i===0?' hm-rev-dot-active':'')+'" data-rev-dot="'+di+'"></span>';}).join('');
   }
   var refNational=document.createElement('button');refNational.type='button';refNational.className='ref-national';refNational.setAttribute('data-ref-filter','featured');refNational.innerHTML='<span aria-hidden="true">✦</span> عروض اليوم الوطني';
   if(window.matchMedia('(max-width:700px)').matches){
@@ -1944,6 +1928,59 @@ refPolished.querySelector(".ref-footer").outerHTML=hmDecodeCss("PGZvb3RlciBjbGFz
 var hmCrispStyle=document.createElement("style");hmCrispStyle.textContent=hmDecodeCss("I2htLWxwIC5yZWYtc3RlcC1waWN0dXJlLCNobS1scCAucmVmLWJlbmVmaXQtYXJ0e2JhY2tncm91bmQ6I2Y1ZWZkZiFpbXBvcnRhbnQ7ZGlzcGxheTppbmxpbmUtZmxleCFpbXBvcnRhbnQ7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpjZW50ZXI7Ym9yZGVyLXJhZGl1czo1MCU7Ym9yZGVyOjFweCBzb2xpZCAjZThkY2MwfSNobS1scCAucmVmLXN0ZXAtcGljdHVyZSBzdmd7d2lkdGg6NjYlO2hlaWdodDo2NiU7Y29sb3I6IzExNTczY30jaG0tbHAgLnJlZi1iZW5lZml0LWFydCBzdmd7d2lkdGg6ODUlO2hlaWdodDo4NSU7Y29sb3I6IzExNTczY30jaG0tbHAgLmhtLWF1dGhlbnRpYy1sb2dve2JhY2tncm91bmQ6bm9uZSFpbXBvcnRhbnQ7d2lkdGg6YXV0byFpbXBvcnRhbnQ7aGVpZ2h0OmF1dG8haW1wb3J0YW50fSNobS1scCAuaG0tYXV0aGVudGljLWxvZ28gaW1ne3dpZHRoOjEwNnB4IWltcG9ydGFudDtoZWlnaHQ6MTAxcHghaW1wb3J0YW50O29iamVjdC1maXQ6Y29udGFpbiFpbXBvcnRhbnR9I2htLWxwIC5yZWYtZmluYWx7YmFja2dyb3VuZDojMDk1MDM5IWltcG9ydGFudDtwb3NpdGlvbjpyZWxhdGl2ZTtvdmVyZmxvdzpoaWRkZW59I2htLWxwIC5yZWYtZmluYWw6YmVmb3JlLCNobS1scCAucmVmLWZpbmFsOmFmdGVye2JhY2tncm91bmQ6bm9uZSFpbXBvcnRhbnR9I2htLWxwIC5yZWYtcmV2aWV3LWF2YXRhcntiYWNrZ3JvdW5kLWltYWdlOm5vbmUhaW1wb3J0YW50O2JhY2tncm91bmQ6I2YxZThkNCFpbXBvcnRhbnQ7ZGlzcGxheTppbmxpbmUtZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OmNlbnRlcjtjb2xvcjojMTQ1YzQwfSNobS1scCAucmVmLXJldmlldy1hdmF0YXIgc3Zne3dpZHRoOjgwJTtoZWlnaHQ6ODAlfSNobS1scCAuaG0tZm9vdGVyLXY0e2Rpc3BsYXk6YmxvY2shaW1wb3J0YW50O2JhY2tncm91bmQ6I2Y3ZjNlOSFpbXBvcnRhbnQ7cGFkZGluZzowIDI4cHghaW1wb3J0YW50O2NvbG9yOiMzNDQzMzk7Zm9udC1zaXplOjEzcHh9I2htLWxwIC5obS1iYWNrLXRvcHtkaXNwbGF5OmJsb2NrO3RleHQtYWxpZ246Y2VudGVyO3BhZGRpbmc6MThweDtib3JkZXItYm90dG9tOjFweCBzb2xpZCAjZGZkN2M1fSNobS1scCAuaG0tZm9vdGVyLWNvbHVtbnN7ZGlzcGxheTpncmlkO2dyaWQtdGVtcGxhdGUtY29sdW1uczoxLjRmciAxZnIgMS4yZnIgLjg1ZnI7Z2FwOjMwcHg7cGFkZGluZzozMnB4IDB9I2htLWxwIC5obS1mb290ZXItY29sdW1ucyBoM3tmb250LXNpemU6MTVweDttYXJnaW46MTJweCAwIDE4cHg7Zm9udC13ZWlnaHQ6NzAwfSNobS1scCAuaG0tZm9vdGVyLWNvbHVtbnMgYXtkaXNwbGF5OmJsb2NrO21hcmdpbjowIDAgMTNweDt0ZXh0LWRlY29yYXRpb246bm9uZTtvdmVyZmxvdy13cmFwOmFueXdoZXJlfSNobS1scCAuaG0tZm9vdGVyLWxvZ297d2lkdGg6MTE2cHg7aGVpZ2h0OmF1dG87b2JqZWN0LWZpdDpjb250YWlufSNobS1scCAuaG0tc3RvcmUtcHJvZmlsZSBwe2xpbmUtaGVpZ2h0OjEuOTttYXgtd2lkdGg6MzAwcHh9I2htLWxwIC5obS1mb290ZXItc29jaWFse2Rpc3BsYXk6ZmxleDtmbGV4LXdyYXA6d3JhcDtnYXA6MTBweH0jaG0tbHAgLmhtLWZvb3Rlci1zb2NpYWwgYXtmb250LXNpemU6MTJweH0jaG0tbHAgLmhtLWNlcnRpZmljYXRle2Rpc3BsYXk6ZmxleCFpbXBvcnRhbnQ7YWxpZ24taXRlbXM6Y2VudGVyO2dhcDo4cHg7bWFyZ2luLXRvcDoyNHB4IWltcG9ydGFudH0jaG0tbHAgLmhtLWNlcnRpZmljYXRlIGltZ3tvYmplY3QtZml0OmNvbnRhaW59I2htLWxwIC5obS1mb290ZXItYm90dG9te2JvcmRlci10b3A6MXB4IHNvbGlkICNkZmQ3YzU7cGFkZGluZzoyMHB4IDA7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2VlbjtnYXA6MjBweDtmbGV4LXdyYXA6d3JhcH0jaG0tbHAgLmhtLXBheW1lbnRze2Rpc3BsYXk6ZmxleDtmbGV4LXdyYXA6d3JhcDtnYXA6N3B4fSNobS1scCAuaG0tcGF5bWVudHMgaW1ne3dpZHRoOjQ4cHg7aGVpZ2h0OjMwcHg7b2JqZWN0LWZpdDpjb250YWluO3BhZGRpbmc6NHB4O2JhY2tncm91bmQ6d2hpdGU7Ym9yZGVyLXJhZGl1czo1cHh9I2htLWxwIC5obS1uYXRpdmUtbmV3c2xldHRlci1zbG90OmVtcHR5e2Rpc3BsYXk6bm9uZX1AbWVkaWEobWF4LXdpZHRoOjc2MHB4KXsjaG0tbHAgLmhtLWZvb3Rlci1jb2x1bW5ze2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnIgMWZyO2dhcDoyMHB4fSNobS1scCAuaG0tYXV0aGVudGljLWxvZ28gaW1ne3dpZHRoOjc4cHghaW1wb3J0YW50O2hlaWdodDo3NXB4IWltcG9ydGFudH19QG1lZGlhKG1heC13aWR0aDo0MjBweCl7I2htLWxwIC5obS1mb290ZXItY29sdW1uc3tncmlkLXRlbXBsYXRlLWNvbHVtbnM6MWZyfX0K");refPolished.appendChild(hmCrispStyle);
 refPolished.querySelectorAll('.hm-authentic-logo img,.hm-footer-logo').forEach(function(img){img.src='https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=400,height=400,onerror=redirect,format=auto/zvoeKA/FbEhRrntcSY1kEU8YzkwDGgjtNRx5fEMBtHK4j0h.png';img.removeAttribute('srcset');});
 var hmRuntimeFixStyle=document.createElement('style');hmRuntimeFixStyle.textContent=hmDecodeCss('I2htLWxwIC5obS1zd3JhcHtoZWlnaHQ6YXV0byFpbXBvcnRhbnQ7bWluLWhlaWdodDo1MHB4IWltcG9ydGFudDtsaW5lLWhlaWdodDpub3JtYWwhaW1wb3J0YW50O292ZXJmbG93OnZpc2libGUhaW1wb3J0YW50fSNobS1scCAuaG0tYWRkLWJ1dHRvbnthcHBlYXJhbmNlOm5vbmUhaW1wb3J0YW50Oy13ZWJraXQtYXBwZWFyYW5jZTpub25lIWltcG9ydGFudDtkaXNwbGF5OmZsZXghaW1wb3J0YW50O2FsaWduLWl0ZW1zOmNlbnRlciFpbXBvcnRhbnQ7anVzdGlmeS1jb250ZW50OmNlbnRlciFpbXBvcnRhbnQ7Z2FwOjlweCFpbXBvcnRhbnQ7d2lkdGg6MTAwJSFpbXBvcnRhbnQ7aGVpZ2h0OjUwcHghaW1wb3J0YW50O21pbi1oZWlnaHQ6NTBweCFpbXBvcnRhbnQ7cGFkZGluZzowIDE2cHghaW1wb3J0YW50O21hcmdpbjowIWltcG9ydGFudDtib3JkZXI6MXB4IHNvbGlkICMwYjYwNDEhaW1wb3J0YW50O2JvcmRlci1yYWRpdXM6OTk5cHghaW1wb3J0YW50O2JhY2tncm91bmQ6IzBiNjA0MSFpbXBvcnRhbnQ7Y29sb3I6I2ZmZiFpbXBvcnRhbnQ7Zm9udC1mYW1pbHk6IkNhaXJvIiwiQWxtYXJhaSIsc2Fucy1zZXJpZiFpbXBvcnRhbnQ7Zm9udC1zaXplOjE1cHghaW1wb3J0YW50O2ZvbnQtd2VpZ2h0OjcwMCFpbXBvcnRhbnQ7bGluZS1oZWlnaHQ6MSFpbXBvcnRhbnQ7Y3Vyc29yOnBvaW50ZXIhaW1wb3J0YW50O29wYWNpdHk6MSFpbXBvcnRhbnQ7dmlzaWJpbGl0eTp2aXNpYmxlIWltcG9ydGFudDtib3gtc2hhZG93OjAgOHB4IDIwcHggcmdiYSgxMSw5Niw2NSwuMTUpIWltcG9ydGFudDt0cmFuc2l0aW9uOmJhY2tncm91bmQgLjJzIGVhc2UsdHJhbnNmb3JtIC4ycyBlYXNlLG9wYWNpdHkgLjJzIGVhc2UhaW1wb3J0YW50fSNobS1scCAuaG0tYWRkLWJ1dHRvbiBzcGFue2Rpc3BsYXk6aW5saW5lIWltcG9ydGFudDtjb2xvcjojZmZmIWltcG9ydGFudDtvcGFjaXR5OjEhaW1wb3J0YW50O3Zpc2liaWxpdHk6dmlzaWJsZSFpbXBvcnRhbnQ7d2hpdGUtc3BhY2U6bm93cmFwIWltcG9ydGFudH0jaG0tbHAgLmhtLWFkZC1idXR0b24gc3Zne2Rpc3BsYXk6YmxvY2shaW1wb3J0YW50O2ZsZXg6MCAwIDE5cHghaW1wb3J0YW50O2NvbG9yOiNmZmYhaW1wb3J0YW50O3N0cm9rZTojZmZmIWltcG9ydGFudH0jaG0tbHAgLmhtLWFkZC1idXR0b246aG92ZXJ7YmFja2dyb3VuZDojMDc0YjMzIWltcG9ydGFudDt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtMXB4KX0jaG0tbHAgLmhtLWFkZC1idXR0b246Zm9jdXMtdmlzaWJsZXtvdXRsaW5lOjNweCBzb2xpZCByZ2JhKDE5NiwxNTcsNjMsLjQpIWltcG9ydGFudDtvdXRsaW5lLW9mZnNldDozcHghaW1wb3J0YW50fSNobS1scCAuaG0tYWRkLWJ1dHRvbjpkaXNhYmxlZCwjaG0tbHAgLmhtLWFkZC1idXR0b25bYXJpYS1idXN5PSJ0cnVlIl17Y3Vyc29yOndhaXQhaW1wb3J0YW50O29wYWNpdHk6LjchaW1wb3J0YW50O3RyYW5zZm9ybTpub25lIWltcG9ydGFudH0=');refPolished.appendChild(hmRuntimeFixStyle);
+/* Keep the reference review composition at tablet and desktop widths too. */
+var hmReviewLayoutStyle=document.createElement('style');
+hmReviewLayoutStyle.textContent=[
+  '#hm-lp .ref-reviews{position:relative!important;max-width:1180px!important;margin:0 auto!important;padding:38px 5.5% 46px!important;text-align:center!important;overflow:hidden!important}',
+  '#hm-lp .ref-reviews h2{display:block!important;margin:0 auto 12px!important;color:#0c4737!important;font-size:clamp(27px,4.6vw,52px)!important;line-height:1.3!important;font-weight:900!important}',
+  '#hm-lp .hm-rev-sub{display:block!important;margin:0 0 30px!important;color:#6c7073!important;font-size:clamp(16px,2.4vw,26px)!important;line-height:1.5!important}',
+  '#hm-lp .hm-rev-doodle-heart{display:block!important;position:absolute!important;right:0!important;top:64px!important;color:#9e7d38!important;font-size:clamp(14px,1.8vw,20px)!important;line-height:1.3!important;transform:rotate(-8deg)!important;pointer-events:none!important}',
+  '#hm-lp .hm-rev-doodle-paw{display:inline-block!important;margin-right:12px!important;font-size:.5em!important;opacity:.7!important;vertical-align:middle!important}',
+  '#hm-lp .hm-rev-summary{display:grid!important;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;align-items:center!important;direction:rtl!important;min-height:226px!important;margin:0 0 22px!important;padding:26px 40px!important;border-radius:30px!important;background:linear-gradient(125deg,#075c44,#064c3c)!important;position:relative!important;overflow:hidden!important;box-sizing:border-box!important}',
+  '#hm-lp .hm-rev-summary-cat{position:absolute!important;left:0!important;bottom:-22px!important;width:240px!important;height:240px!important;object-fit:contain!important;opacity:.75!important;filter:sepia(1) saturate(2) hue-rotate(330deg) brightness(1.9)!important;pointer-events:none!important}',
+  '#hm-lp .hm-rev-summary-badge{grid-column:1!important;grid-row:1!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:14px!important;min-width:0!important;z-index:1!important;text-align:center!important}',
+  '#hm-lp .hm-rev-summary-badge-icon{display:grid!important;place-items:center!important;width:52px!important;height:52px!important;border-radius:50%!important;background:#fff6e3!important;font-size:27px!important}',
+  '#hm-lp .hm-rev-summary-badge-text{color:#fff!important;font-size:clamp(16px,2vw,23px)!important;font-weight:800!important;line-height:1.4!important}',
+  '#hm-lp .hm-rev-summary-badge-text small{display:block!important;margin-top:10px!important;color:#e1efe9!important;font-size:.78em!important;font-weight:500!important}',
+  '#hm-lp .hm-rev-summary-divider{grid-column:2!important;grid-row:1!important;align-self:stretch!important;width:1px!important;background:rgba(255,255,255,.32)!important}',
+  '#hm-lp .hm-rev-summary-main{grid-column:3!important;grid-row:1!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;z-index:1!important}',
+  '#hm-lp .hm-rev-summary-label{color:#fff!important;font-size:clamp(16px,2vw,22px)!important;font-weight:800!important}',
+  '#hm-lp .hm-rev-summary-score{color:#fff!important;font-size:clamp(48px,7vw,75px)!important;font-weight:900!important;line-height:1.1!important}',
+  '#hm-lp .hm-rev-summary-stars{color:#f5be51!important;font-size:clamp(26px,3.6vw,39px)!important;line-height:1!important;letter-spacing:4px!important;direction:ltr!important}',
+  '#hm-lp .hm-rev-summary-count{color:#fff!important;font-size:clamp(15px,1.8vw,21px)!important;white-space:nowrap!important}',
+  '#hm-lp .hm-rev-filters{display:flex!important;justify-content:center!important;flex-wrap:wrap!important;gap:12px!important;margin:0 0 24px!important;padding:0!important;overflow:visible!important}',
+  '#hm-lp .hm-rev-filter{border:1px solid #e9e6dc!important;border-radius:99px!important;background:#f5f3ec!important;color:#164b3d!important;padding:12px 22px!important;font-size:clamp(14px,1.8vw,20px)!important;font-weight:700!important;line-height:1.2!important;font-family:inherit!important;white-space:nowrap!important;cursor:pointer!important}',
+  '#hm-lp .hm-rev-filter.hm-rev-filter-active{background:#075b44!important;color:#fff!important;border-color:#075b44!important}',
+  '#hm-lp .ref-reviews .hm-rslider{position:relative!important;max-width:none!important;overflow:visible!important}',
+  '#hm-lp .hm-rscroll{display:flex!important;gap:22px!important;direction:rtl!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;padding:3px 3% 22px!important;scrollbar-width:none!important}',
+  '#hm-lp .ref-reviews .hm-rc{box-sizing:border-box!important;flex:0 0 min(88%,730px)!important;width:min(88%,730px)!important;max-width:none!important;min-height:450px!important;margin:0!important;padding:30px 34px 0!important;direction:rtl!important;text-align:right!important;scroll-snap-align:center!important;border:1px solid #eadfcb!important;border-radius:38px!important;background:#fffdfa!important;box-shadow:0 7px 18px rgba(80,60,25,.1)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important}',
+  '#hm-lp .hm-rc::before{display:none!important}',
+  '#hm-lp .ref-review-top{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;margin:0 0 12px!important}',
+  '#hm-lp .ref-review-who{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}',
+  '#hm-lp .ref-review-name{color:#0b4838!important;font-size:clamp(18px,2vw,24px)!important;font-weight:900!important;white-space:nowrap!important}',
+  '#hm-lp .ref-review-avatar{display:grid!important;place-items:center!important;width:58px!important;height:58px!important;flex:0 0 58px!important;border-radius:50%!important;background:#f9f0db!important;color:#9b7b42!important}',
+  '#hm-lp .ref-review-avatar svg{width:27px!important;height:27px!important}',
+  '#hm-lp .ref-review-verified{display:inline-flex!important;align-items:center!important;gap:8px!important;padding:8px 17px!important;border-radius:99px!important;background:#e7f2e9!important;color:#075b44!important;font-size:clamp(14px,1.6vw,19px)!important;font-weight:800!important;white-space:nowrap!important}',
+  '#hm-lp .ref-review-verified span{display:grid!important;place-items:center!important;width:26px!important;height:26px!important;border-radius:50%!important;background:#087554!important;color:#fff!important}',
+  '#hm-lp .ref-reviews .ref-review-stars{display:block!important;align-self:flex-start!important;color:#c59029!important;font-size:clamp(26px,3vw,36px)!important;line-height:1.1!important;letter-spacing:3px!important;direction:ltr!important;margin:0 0 14px!important}',
+  '#hm-lp .ref-review-copy-wrap{position:relative!important;padding-right:27px!important}',
+  '#hm-lp .ref-review-quote-mark{position:absolute!important;right:-6px!important;top:-14px!important;color:#d4ba80!important;font:70px/1 Georgia,serif!important;pointer-events:none!important}',
+  '#hm-lp .ref-review-copy{margin:0 0 14px!important;color:#233a38!important;font-size:clamp(17px,2.1vw,23px)!important;line-height:1.8!important;text-align:right!important}',
+  '#hm-lp .ref-review-photo-wrap{position:relative!important;min-height:170px!important;margin:auto -34px 0!important;border-radius:0 0 37px 37px!important;background:linear-gradient(100deg,#f9f1e1,#f5f7ef)!important;overflow:hidden!important}',
+  '#hm-lp .ref-review-photo{display:block!important;position:absolute!important;left:0!important;bottom:0!important;width:42%!important;height:100%!important;object-fit:contain!important;object-position:left bottom!important;padding:0!important}',
+  '#hm-lp .ref-review-caption{position:absolute!important;right:28px!important;bottom:13px!important;left:28px!important;display:block!important;padding:9px 18px!important;border-radius:99px!important;background:#f7e7c7!important;color:#806234!important;font-size:clamp(14px,1.7vw,20px)!important;font-weight:700!important;text-align:center!important;box-shadow:none!important}',
+  '#hm-lp .ref-review-photo-heart{position:absolute!important;left:24%!important;top:12px!important;color:#9e7d38!important;font-size:34px!important;z-index:2!important}',
+  '#hm-lp .ref-reviews .hm-rarrow{width:52px!important;height:52px!important;border:1px solid #eadfcb!important;color:#075b44!important;font-size:36px!important;top:50%!important}',
+  '#hm-lp .ref-reviews .hm-rprev{right:0!important;left:auto!important}',
+  '#hm-lp .ref-reviews .hm-rnext{left:0!important;right:auto!important}',
+  '#hm-lp .hm-rev-dots-row{display:flex!important;align-items:center!important;justify-content:center!important;gap:26px!important;margin:10px 0 0!important}',
+  '#hm-lp .hm-rev-doodle-more{display:block!important;color:#a28146!important;font-size:17px!important}',
+  '#hm-lp .hm-rev-dots{display:flex!important;align-items:center!important;gap:10px!important}',
+  '#hm-lp .hm-rev-dot{display:block!important;width:12px!important;height:12px!important;border-radius:50%!important;background:#e1e5d5!important}',
+  '#hm-lp .hm-rev-dot-active{width:30px!important;border-radius:8px!important;background:#075b44!important}',
+  '@media(max-width:700px){#hm-lp .ref-reviews{padding:24px 5.5% 34px!important}#hm-lp .hm-rev-doodle-heart{display:none!important}#hm-lp .hm-rev-summary{min-height:190px!important;padding:20px 12px!important;border-radius:22px!important}#hm-lp .hm-rev-summary-cat{width:145px!important;height:145px!important}#hm-lp .hm-rev-summary-badge-icon{width:38px!important;height:38px!important;font-size:20px!important}#hm-lp .hm-rev-filters{justify-content:flex-start!important;flex-wrap:nowrap!important;overflow-x:auto!important}#hm-lp .hm-rev-filter{padding:9px 16px!important}#hm-lp .ref-reviews .hm-rc{flex-basis:88%!important;width:88%!important;min-height:370px!important;padding:18px 18px 0!important;border-radius:25px!important}#hm-lp .ref-review-avatar{width:36px!important;height:36px!important;flex-basis:36px!important}#hm-lp .ref-review-avatar svg{width:20px!important;height:20px!important}#hm-lp .ref-review-verified{padding:5px 9px!important}#hm-lp .ref-review-verified span{width:20px!important;height:20px!important}#hm-lp .ref-review-photo-wrap{margin-right:-18px!important;margin-left:-18px!important;border-radius:0 0 24px 24px!important}#hm-lp .ref-review-caption{left:10px!important;right:10px!important}#hm-lp .ref-reviews .hm-rarrow{width:36px!important;height:36px!important;font-size:24px!important}}'
+].join('');
+refPolished.appendChild(hmReviewLayoutStyle);
 html=refPolished.innerHTML;
 
   root.innerHTML = html;
@@ -2704,7 +2741,7 @@ html=refPolished.innerHTML;
 
       var firstReview = reviewScroll.querySelector('.hm-rc');
       var reviewStep = firstReview ? Math.round(firstReview.getBoundingClientRect().width + 20) : 320;
-      var reviewDelta = reviewArrow.classList.contains('hm-rprev') ? -reviewStep : reviewStep;
+      var reviewDelta = reviewArrow.classList.contains('hm-rprev') ? reviewStep : -reviewStep;
 
       reviewScroll.scrollBy({
         left: reviewDelta,
@@ -2825,7 +2862,13 @@ html=refPolished.innerHTML;
           if (dist < bestDist) { bestDist = dist; activeIdx = ci; }
         }
         var dots = revDotsWrap.querySelectorAll('.hm-rev-dot');
-        Array.prototype.forEach.call(dots, function (d, di) { d.classList.toggle('hm-rev-dot-active', di === activeIdx); });
+        var activeDot=0;
+        var dotDistance=Infinity;
+        Array.prototype.forEach.call(dots, function (d, di) {
+          var distance=Math.abs(parseInt(d.getAttribute('data-rev-dot'),10)-activeIdx);
+          if(distance<dotDistance){dotDistance=distance;activeDot=di;}
+        });
+        Array.prototype.forEach.call(dots, function (d, di) { d.classList.toggle('hm-rev-dot-active', di === activeDot); });
       }, 100);
     });
   }
