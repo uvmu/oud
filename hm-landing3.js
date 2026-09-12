@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.13.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.13.1 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1674,7 +1674,9 @@
   }
   var countdownFloatEl=refPolished.querySelector('.ref-countdown-float');
   var hmIsMobileLayout=window.matchMedia('(max-width:700px)').matches;
-  if(countdownFloatEl){
+  function hmApplyCountdownLayout(){
+    hmIsMobileLayout=window.matchMedia('(max-width:700px)').matches;
+    if(!countdownFloatEl)return;
     if(hmIsMobileLayout&&heroSectionEl){
       countdownFloatEl.classList.add('ref-countdown-bar');
       countdownFloatEl.style.setProperty('position','static','important');
@@ -1726,6 +1728,15 @@
       });
     }
   }
+  hmApplyCountdownLayout();
+  setTimeout(hmApplyCountdownLayout,50);
+  setTimeout(hmApplyCountdownLayout,400);
+  setTimeout(hmApplyCountdownLayout,1200);
+  var hmCountdownResizeTimer=0;
+  window.addEventListener('resize',function(){
+    if(hmCountdownResizeTimer)clearTimeout(hmCountdownResizeTimer);
+    hmCountdownResizeTimer=setTimeout(hmApplyCountdownLayout,150);
+  });
   var featureArtEl=refPolished.querySelector('.ref-feature-art:not(.ref-feature-art-2)');
   if(featureArtEl){
     featureArtEl.style.setProperty('aspect-ratio','800 / 1000','important');
@@ -1783,7 +1794,8 @@
       '#hm-lp .ref-benefits small{font-size:11px!important;margin-top:1px!important;line-height:1.3!important}'+
     '}'+
     '#hm-lp .ref-reviews .hm-rc{border:1.5px solid rgba(191,152,66,.4)!important;background:linear-gradient(180deg,#fff,#fdfbf3)!important;box-shadow:0 8px 22px rgba(16,88,57,.1)!important;position:relative!important;overflow:visible!important}'+
-    '#hm-lp .ref-reviews .hm-rc-quote{display:block!important;position:absolute!important;top:-6px!important;right:16px!important;font-size:46px!important;font-family:Georgia,serif!important;color:#bd9842!important;opacity:.5!important;line-height:1!important;pointer-events:none!important}'+
+    '#hm-lp .ref-reviews .hm-rc-quote{display:block!important;position:absolute!important;top:-18px!important;right:14px!important;font-size:38px!important;font-family:Georgia,serif!important;color:#bd9842!important;opacity:.6!important;line-height:1!important;pointer-events:none!important}'+
+    '#hm-lp .ref-review-stars{margin-top:6px!important}'+
     '#hm-lp .ref-review-stars{filter:drop-shadow(0 1px 1px rgba(189,152,66,.35))!important}'+
     '@keyframes hmRevGlow{0%,100%{box-shadow:0 8px 22px rgba(16,88,57,.1),0 0 0 0 rgba(191,152,66,.35)}50%{box-shadow:0 8px 22px rgba(16,88,57,.1),0 0 0 6px rgba(191,152,66,0)}}'+
     '#hm-lp .ref-reviews .hm-rc{animation:hmRevGlow 3.6s ease-in-out infinite!important}'+
