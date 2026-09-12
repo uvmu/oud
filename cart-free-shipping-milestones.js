@@ -1,4 +1,4 @@
-/* cart-free-shipping-milestones.js - hamtaro.sa cart milestones | v1.0.0 */
+/* cart-free-shipping-milestones.js - hamtaro.sa cart milestones | v1.1.0 */
 (function () {
   'use strict';
 
@@ -151,64 +151,54 @@
     (document.head || document.documentElement).appendChild(style);
   }
 
+  // Free-shipping phase (299) is frozen — approved plan for this round only
+  // activates the gift phase (399). Do not reintroduce phase1 logic without
+  // an explicit go-ahead; THRESHOLD_SHIPPING is kept only for that future switch.
   function updateWidget(total) {
     var phase1 = document.getElementById('cfm-phase1');
     var phase2 = document.getElementById('cfm-phase2');
-    var p1Fill = document.getElementById('cfm-p1-fill');
     var p2Fill = document.getElementById('cfm-p2-fill');
-    var p1Status = document.getElementById('cfm-p1-status');
     var p2Status = document.getElementById('cfm-p2-status');
-    var p1Icon = document.getElementById('cfm-p1-icon');
     var p2Icon = document.getElementById('cfm-p2-icon');
     var recsRow = document.getElementById('cfm-recs-row');
     var recsHint = document.getElementById('cfm-recs-hint');
 
-    if (!phase1 || !phase2) return;
+    if (!phase2) return;
 
-    var shippingDone = total >= THRESHOLD_SHIPPING;
     var giftDone = total >= THRESHOLD_GIFT;
 
-    phase1.style.display = shippingDone ? 'none' : '';
-    phase2.style.display = shippingDone ? '' : 'none';
+    if (phase1) phase1.style.display = 'none';
+    phase2.style.display = '';
 
-    if (!shippingDone) {
-      var shippingRemaining = (THRESHOLD_SHIPPING - total).toFixed(2);
-      if (p1Fill) p1Fill.style.width = Math.min(100, (total / THRESHOLD_SHIPPING) * 100).toFixed(2) + '%';
-      if (p1Icon) p1Icon.textContent = '🚚';
-      if (p1Status) p1Status.innerHTML = 'باقي <strong>' + shippingRemaining + ' ' + CURRENCY + '</strong> للشحن المجاني';
-    }
+    if (p2Fill) p2Fill.style.width = Math.min(100, (total / THRESHOLD_GIFT) * 100).toFixed(2) + '%';
 
-    if (shippingDone) {
-      if (p2Fill) p2Fill.style.width = Math.min(100, (total / THRESHOLD_GIFT) * 100).toFixed(2) + '%';
-
-      if (giftDone) {
-        if (p2Icon) p2Icon.textContent = '✅';
-        if (p2Status) {
-          p2Status.className = 'cfm-phase-status cfm-status-done';
-          p2Status.textContent = '🎉 هديتك جاهزة وستُضاف لطلبك تلقائياً!';
-        }
-      } else {
-        var giftRemaining = (THRESHOLD_GIFT - total).toFixed(2);
-        if (p2Icon) p2Icon.textContent = '🎁';
-        if (p2Status) {
-          p2Status.className = 'cfm-phase-status';
-          p2Status.innerHTML = 'باقي <strong>' + giftRemaining + ' ' + CURRENCY + '</strong> للهدية المجانية';
-        }
+    if (giftDone) {
+      if (p2Icon) p2Icon.textContent = '✅';
+      if (p2Status) {
+        p2Status.className = 'cfm-phase-status cfm-status-done';
+        p2Status.textContent = '🎉 هديتك جاهزة وستُضاف لطلبك تلقائياً!';
+      }
+    } else {
+      var giftRemaining = (THRESHOLD_GIFT - total).toFixed(2);
+      if (p2Icon) p2Icon.textContent = '🎁';
+      if (p2Status) {
+        p2Status.className = 'cfm-phase-status';
+        p2Status.innerHTML = 'باقي <strong>' + giftRemaining + ' ' + CURRENCY + '</strong> للهدية المجانية';
       }
     }
 
     if (recsRow) recsRow.classList.toggle('hidden', giftDone);
     if (recsHint) {
-      recsHint.textContent = shippingDone
-        ? 'باقي ' + (THRESHOLD_GIFT - total).toFixed(2) + ' ' + CURRENCY + ' للهدية! تسوّق الأكثر مبيعاً 🎁'
-        : 'باقي ' + (THRESHOLD_SHIPPING - total).toFixed(2) + ' ' + CURRENCY + ' للشحن المجاني والهدية 🎁';
+      recsHint.textContent = 'باقي ' + (THRESHOLD_GIFT - total).toFixed(2) + ' ' + CURRENCY + ' للهدية! تسوّق الأكثر مبيعاً 🎁';
     }
   }
 
   function extractTotal(response) {
     var data = (response && response.data) || response || {};
     var cart = data.cart || data;
-    var rawTotal = cart.sub_total || cart.total || cart.total_amount || 0;
+    // Prefer the tax-inclusive amount the customer actually sees; sub_total
+    // (pre-tax) understated progress toward the threshold.
+    var rawTotal = cart.total || cart.total_amount || cart.sub_total || 0;
     var total = typeof rawTotal === 'number'
       ? rawTotal
       : parseFloat(String(rawTotal).replace(/[^0-9.]/g, ''));
