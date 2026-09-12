@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.14.1 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.14.2 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1806,8 +1806,8 @@
       '#hm-lp .ref-reviews .hm-rc:not(.hm-rc-visible){opacity:0!important;transform:translateY(16px) rotate(-1.2deg) scale(.97)!important}'+
       '#hm-lp .ref-reviews .hm-rc.hm-rc-visible{animation:hmTagSwing 4.8s ease-in-out .6s infinite!important}'+
       '@keyframes hmTagSwing{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1deg)}}'+
-      '#hm-lp .ref-reviews .hm-rc-hole{display:block!important;position:absolute!important;top:9px!important;right:50%!important;transform:translateX(50%)!important;width:13px!important;height:13px!important;border-radius:50%!important;background:#faf6ec!important;border:2px solid #b7a06a!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.28)!important;z-index:3!important}'+
-      '#hm-lp .ref-reviews .hm-rc-hole::before{content:"";position:absolute;top:-12px;left:50%;width:24px;height:15px;border:2px solid #9a875a;border-bottom:none;border-radius:14px 14px 0 0;transform:translateX(-50%)}'+
+      '#hm-lp .ref-reviews .hm-rc-hole{display:block!important;position:absolute!important;top:16px!important;right:50%!important;transform:translateX(50%)!important;width:13px!important;height:13px!important;border-radius:50%!important;background:#faf6ec!important;border:2px solid #b7a06a!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.28)!important;z-index:3!important}'+
+      '#hm-lp .ref-reviews .hm-rc-hole::before{content:"";position:absolute;top:-8px;left:50%;width:22px;height:11px;border:2px solid #9a875a;border-bottom:none;border-radius:14px 14px 0 0;transform:translateX(-50%)}'+
       '#hm-lp .ref-reviews .ref-review-stars{display:none!important}'+
       '#hm-lp .ref-reviews .hm-rc-quote{display:none!important}'+
       '#hm-lp .ref-reviews .hm-rc-paw{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;margin:0 0 8px!important}'+
