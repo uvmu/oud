@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.14.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.14.1 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1639,6 +1639,13 @@
   var refReviewTrack=refPolished.querySelector('.hm-rscroll');
   // Retain the supplied customer statements; only their presentation changes.
   refReviewTrack.innerHTML=REVS.map(function(markup,i){var t=document.createElement('div');t.innerHTML=markup;var text=t.querySelector('.hm-rtxt').textContent.replace(/^[“”]|[“”]$/g,'');var author=t.querySelector('.hm-rnm').firstChild.textContent.trim();var q=document.createElement('article');q.className='hm-rc';var hole=document.createElement('span');hole.className='hm-rc-hole';hole.setAttribute('aria-hidden','true');var quoteMark=document.createElement('span');quoteMark.className='hm-rc-quote';quoteMark.setAttribute('aria-hidden','true');quoteMark.textContent='“';var stars=document.createElement('span');stars.className='ref-review-stars';stars.setAttribute('aria-label','5 من 5');stars.textContent='★★★★★';var paw=document.createElement('div');paw.className='hm-rc-paw';paw.setAttribute('aria-hidden','true');var pawIcon=document.createElement('span');pawIcon.className='hm-rc-paw-icon';pawIcon.textContent='🐾';var pawScore=document.createElement('span');pawScore.className='hm-rc-paw-score';pawScore.textContent='5.0';paw.appendChild(pawIcon);paw.appendChild(pawScore);var copy=document.createElement('blockquote');copy.className='ref-review-copy';copy.textContent=text;var divider=document.createElement('div');divider.className='hm-rc-divider';divider.setAttribute('aria-hidden','true');var foot=document.createElement('div');foot.className='ref-review-author';var avatar=document.createElement('span');avatar.className='ref-review-avatar ref-avatar-'+(i%3);avatar.setAttribute('aria-hidden','true');var name=document.createElement('span');name.className='ref-review-name';name.textContent=author;foot.appendChild(avatar);foot.appendChild(name);q.appendChild(hole);q.appendChild(quoteMark);q.appendChild(stars);q.appendChild(paw);q.appendChild(copy);q.appendChild(divider);q.appendChild(foot);return q.outerHTML;}).join('');
+  if(window.matchMedia('(max-width:700px)').matches){
+    refReviewTrack.querySelectorAll('.hm-rc').forEach(function(card){
+      card.style.setProperty('overflow','visible','important');
+      card.style.setProperty('height','auto','important');
+      card.style.setProperty('min-height','0','important');
+    });
+  }
   var refNational=document.createElement('button');refNational.type='button';refNational.className='ref-national';refNational.setAttribute('data-ref-filter','featured');refNational.innerHTML='<span aria-hidden="true">✦</span> عروض اليوم الوطني';refPolished.querySelector('.ref-product-head').appendChild(refNational);
 
   var refMark=refPolished.querySelector('.ref-nav .ref-logo');refMark.classList.add('ref-logo-art');refMark.setAttribute('aria-label','Hamtaro — الرئيسية');
