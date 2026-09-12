@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.24.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.25.0 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -2022,12 +2022,11 @@ html=refPolished.innerHTML;
     hmNavMenu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',hmNavClose);});
   }
 
-  // Recurring 7-day cycle anchored to a fixed epoch (not per-visitor), so every
-  // visitor sees the identical countdown and it loops forever with no manual resets.
-  var refCycleSec=7*24*3600;
-  var refEpochSec=Math.floor(Date.parse('2026-09-08T00:00:00+03:00')/1000);
-  function refTick(){var nowSec=Math.floor(Date.now()/1000);var elapsed=((nowSec-refEpochSec)%refCycleSec+refCycleSec)%refCycleSec;var n=refCycleSec-elapsed;var vals=[Math.floor(n/86400),Math.floor(n%86400/3600),Math.floor(n%3600/60),n%60];['days','hours','minutes','seconds'].forEach(function(k,i){root.querySelector('#ref-'+k).textContent=String(vals[i]).padStart(2,'0');});}
-  refTick();window.setInterval(refTick,1000);
+  // One seven-day offer window from September 12, 2026 in Saudi time. It never renews.
+  var refDeadlineMs=Date.parse('2026-09-19T00:00:00+03:00');
+  function hmRemainingOfferSeconds(){return Math.max(0,Math.ceil((refDeadlineMs-Date.now())/1000));}
+  function refTick(){var n=hmRemainingOfferSeconds();var vals=[Math.floor(n/86400),Math.floor(n%86400/3600),Math.floor(n%3600/60),n%60];['days','hours','minutes','seconds'].forEach(function(k,i){root.querySelector('#ref-'+k).textContent=String(vals[i]).padStart(2,'0');});return n;}
+  if(refTick()>0){var refTimer=window.setInterval(function(){if(refTick()===0)window.clearInterval(refTimer);},1000);}
 
 
 
@@ -2660,21 +2659,12 @@ html=refPolished.innerHTML;
     var sEl = root.querySelector('#hm-timer-s');
     if (!hEl || !mEl || !sEl) return;
 
-    var cycleMs = ((11 * 60) + 59) * 60 * 1000;
-    var deadline = Date.now() + cycleMs;
-
     function pad2(value) {
       return value < 10 ? ('0' + value) : String(value);
     }
 
     function tick() {
-      var diff = deadline - Date.now();
-      if (diff <= 0) {
-        deadline = Date.now() + cycleMs;
-        diff = cycleMs;
-      }
-
-      var totalSeconds = Math.floor(diff / 1000);
+      var totalSeconds = hmRemainingOfferSeconds();
       var hours = Math.floor(totalSeconds / 3600);
       var minutes = Math.floor((totalSeconds % 3600) / 60);
       var seconds = totalSeconds % 60;
@@ -2682,10 +2672,10 @@ html=refPolished.innerHTML;
       hEl.textContent = pad2(hours);
       mEl.textContent = pad2(minutes);
       sEl.textContent = pad2(seconds);
+      return totalSeconds;
     }
 
-    tick();
-    window.setInterval(tick, 1000);
+    if(tick()>0){var urgencyTimer=window.setInterval(function(){if(tick()===0)window.clearInterval(urgencyTimer);},1000);}
   }
 
   hmRenderCartState();
