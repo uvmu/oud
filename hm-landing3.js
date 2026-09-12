@@ -1,4 +1,4 @@
-/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.12.0 */
+/* hm-landing3.js — reference/landing embed for cat-food product bundle offers | v1.12.1 */
 (function () {
   'use strict';
   // Repeated execution must not duplicate network patches or event listeners.
@@ -1726,17 +1726,16 @@
       });
     }
   }
-  var hmFeatureArtRatio=hmIsMobileLayout?'350 / 215':'800 / 1000';
   var featureArtEl=refPolished.querySelector('.ref-feature-art:not(.ref-feature-art-2)');
   if(featureArtEl){
-    featureArtEl.style.setProperty('aspect-ratio',hmFeatureArtRatio,'important');
+    featureArtEl.style.setProperty('aspect-ratio','800 / 1000','important');
     featureArtEl.style.setProperty('height','auto','important');
     featureArtEl.style.setProperty('min-height','0','important');
     featureArtEl.style.setProperty('background-size','cover','important');
   }
   var featureArtEl2=refPolished.querySelector('.ref-feature-art-2');
   if(featureArtEl2){
-    featureArtEl2.style.setProperty('aspect-ratio',hmFeatureArtRatio,'important');
+    featureArtEl2.style.setProperty('aspect-ratio','800 / 1000','important');
     featureArtEl2.style.setProperty('height','auto','important');
     featureArtEl2.style.setProperty('min-height','0','important');
     featureArtEl2.style.setProperty('background-size','cover','important');
